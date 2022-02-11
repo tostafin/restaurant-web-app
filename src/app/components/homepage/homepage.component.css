@@ -1,0 +1,117 @@
+.homepage-container {
+  background:
+    url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-1.jpg?alt=media")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  min-height: 100vh;
+}
+
+.restaurant-box {
+  position: relative;
+  left: 5%;
+  width: 40%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0 1em;
+}
+
+.restaurant-title {
+  text-align: center;
+  padding: 1em 0;
+  font-size: 1.9rem;
+  font-weight: 900;
+}
+
+.restaurant-description {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.4;
+  font-size: 1.4rem;
+}
+
+.restaurant-contact {
+  padding: 1.5em 0;
+}
+
+.contact-heading {
+  font-weight: 600;
+}
+
+.restaurant-contact li {
+  font-size: 1.1rem;
+  list-style: none;
+  padding-bottom: 0.5em;
+}
+
+.restaurant-map {
+  border: 0;
+  width: 100%;
+  min-height: 40em;
+  padding: 1em 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .homepage-container {
+    background:
+      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-2.jpg?alt=media")
+      no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .restaurant-box {
+    width: 50%;
+  }
+
+  .restaurant-map {
+    min-height: 35em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homepage-container {
+    background:
+      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-3.jpg?alt=media")
+      no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .restaurant-box {
+    width: 55%;
+  }
+
+  .restaurant-map {
+    min-height: 30em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .restaurant-description {
+    font-size: 1.2rem;
+  }
+
+  .restaurant-contact li {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .restaurant-box {
+    width: 65%;
+  }
+
+  .restaurant-title {
+    font-size: 1.6rem;
+  }
+
+  .restaurant-description {
+    font-size: 1rem;
+  }
+
+  .restaurant-contact li {
+    font-size: 0.9rem;
+  }
+
+  .restaurant-map {
+    min-height: 25em;
+  }
+}

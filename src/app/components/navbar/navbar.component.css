@@ -1,0 +1,40 @@
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #9c27b0;
+  padding: 0.5em;
+  display: flex;
+  color: white;
+  align-items: center;
+  box-shadow: 15px 15px 29px -9px rgba(66, 68, 90, 0.7);
+}
+
+.primary-navbar a {
+  padding: 0.5em;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.primary-navbar a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.secondary-navbar {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .primary-navbar {
+    display: none;
+  }
+
+  .secondary-navbar {
+    display: block;
+  }
+}
