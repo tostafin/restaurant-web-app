@@ -1,6 +1,6 @@
 <nav class="primary-navbar">
-  <a>Homepage</a>
-  <a>Menu</a>
+  <a routerLink="/homepage">Homepage</a>
+  <a routerLink="/dishes">Menu</a>
   <span class="flex-spacer"></span>
   <a>Log in</a>
   <a>Register</a>
@@ -12,11 +12,11 @@
   </button>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="/homepage">
       <mat-icon>home</mat-icon>
-      <span>Home</span>
+      <span>Homepage</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="/dishes">
       <mat-icon>menu_book</mat-icon>
       <span>Menu</span>
     </button>

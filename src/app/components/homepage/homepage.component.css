@@ -1,7 +1,7 @@
 .homepage-container {
   background:
-    url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-1.jpg?alt=media")
-    no-repeat center center fixed;
+    url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage%2F\homepage-1.jpg?al\
+t=media") no-repeat center center fixed;
   background-size: cover;
   color: white;
   min-height: 100vh;
@@ -53,7 +53,8 @@
 @media screen and (max-width: 1024px) {
   .homepage-container {
     background:
-      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-2.jpg?alt=media")
+      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage%2Fhomepage-2.jpg?a\
+lt=media")
       no-repeat center center fixed;
     background-size: cover;
   }
@@ -70,8 +71,8 @@
 @media screen and (max-width: 768px) {
   .homepage-container {
     background:
-      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage-3.jpg?alt=media")
-      no-repeat center center fixed;
+      url("https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fhomepage%2Fhomepage-3.jpg?a\
+lt=media") no-repeat center center fixed;
     background-size: cover;
   }
 
