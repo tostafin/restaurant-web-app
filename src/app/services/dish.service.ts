@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {map, Observable} from "rxjs";
-import {Dish} from "../interfaces/dish";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { map, Observable } from "rxjs";
+import { Dish } from "../interfaces/dish";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DishService {
-  dishes: Observable<Dish[]>
+  dishes: Observable<Dish[]>;
   collectionName: string = "dishes";
 
   constructor(private afs: AngularFirestore) {
@@ -18,6 +18,10 @@ export class DishService {
         return { id, ...data };
       }))
     );
+  }
+
+  getDishes(): Observable<Dish[]> {
+    return this.dishes;
   }
 
 }

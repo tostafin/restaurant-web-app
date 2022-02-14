@@ -1,0 +1,99 @@
+.dishes-container {
+  min-height: 100vh;
+  padding: 1em;
+}
+
+.dishes-filters {
+  padding: 0 1em;
+}
+
+.show-filters-button {
+  text-align: left;
+  margin: 1em 0;
+}
+
+.dishes-cards {
+  display: flex;
+  flex-basis: 80%;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid #595959;
+}
+
+.dish-card {
+  background-color: #424242;
+  flex-basis: 30%;
+  margin: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #595959;
+}
+
+.dish-image source,
+.dish-image img {
+  width: 100%;
+}
+
+.dish-info {
+  padding: 0 0.5em;
+}
+
+.dish-name {
+  font-size: 2rem;
+  padding: 0.5em 0;
+}
+
+.dish-categories {
+  margin-top: 0.5em;
+}
+
+.dish-categories li {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  border-radius: 999em;
+  background-color: #595959;
+  font-size: 1.3rem;
+}
+
+.dish-cuisine {
+  font-size: 1.5rem;
+}
+
+.dish-card-hr {
+  margin: 1em 0;
+}
+
+.dish-price-and-cart {
+  display: flex;
+  align-items: center;
+  margin: 2em 0;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.dish-price-title {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.dish-price-value {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .dish-card {
+    flex-basis: 45%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dish-card {
+    flex-basis: 95%;
+  }
+}
+

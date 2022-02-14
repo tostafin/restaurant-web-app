@@ -1,13 +1,40 @@
 <mat-progress-bar *ngIf="!dishes.length"></mat-progress-bar>
-<section class="dishes-container">
-  <main>
-    <div class="dish-card" *ngFor="let dish of dishes">
-      <p>{{dish.name}}</p>
-      <p>{{dish.cuisine}}</p>
-      <p>{{dish.price}}</p>
-      <p>{{dish.category}}</p>
-      <p>{{dish.id}}</p>
-      <p>{{dish.ingredients}}</p>
-    </div>
-  </main>
-</section>
+<mat-drawer-container hasBackdrop="true" autosize>
+  <mat-drawer #drawer mode="over" class="dishes-filters">
+    <h3>Filters</h3>
+  </mat-drawer>
+  <button class="show-filters-button" type="button" mat-button (click)="drawer.toggle()">
+    Show filters
+  </button>
+  <section class="dishes-container">
+    <main class="dishes-cards">
+      <div class="dish-card"
+           *ngFor="let dish of dishes"
+      >
+        <figure class="dish-figure">
+          <picture class="dish-image">
+            <source media="(max-width: 768px)" srcset="{{getImageUrl(dish.id, '1')}}">
+            <source media="(min-width: 769px)" srcset="{{getImageUrl(dish.id, '0')}}">
+            <img src="{{getImageUrl(dish.id, '0')}}" alt="{{dish.name}}">
+          </picture>
+        </figure>
+        <div class="dish-info">
+          <ul class="dish-categories">
+            <li *ngFor="let category of dish.category">{{category}}</li>
+          </ul>
+          <h2 class="dish-name">{{dish.name | uppercase}}</h2>
+          <h3 class="dish-cuisine">{{dish.cuisine | uppercase}} CUISINE</h3>
+          <hr class="dish-card-hr">
+          <div class="dish-price-and-cart">
+            <div class="dish-price-block">
+              <p class="dish-price-title">Price:</p>
+              <p class="dish-price-value">${{dish.price}}</p>
+            </div>
+            <span class="flex-spacer"></span>
+            <mat-icon class="dish-add-to-cart">add_shopping_cart</mat-icon>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+</mat-drawer-container>

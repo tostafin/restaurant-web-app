@@ -17,7 +17,12 @@ export class DishesComponent implements OnInit {
   }
 
   getDishes(): void {
-    this.dishService.dishes.subscribe(dishes => this.dishes = dishes);
+    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
+  }
+
+  getImageUrl(dishId: string | undefined, idx: string): string {
+    return "https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fdishes%2F" + dishId + "-" +
+    idx + ".jpg?alt=media";
   }
 
 }

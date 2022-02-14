@@ -16,6 +16,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
