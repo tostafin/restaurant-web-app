@@ -1,15 +1,37 @@
-.dishes-container {
-  min-height: 100vh;
-  padding: 1em;
+/* Header */
+.dishes-header {
+  background-color: #9c27b0;
+  display: flex;
+  padding: 1em 0;
 }
 
+.currency-block {
+  text-align: center;
+  margin-right: 1em;
+}
+
+.show-filters-button {
+  font-size: 1.4rem;
+  margin-left: 0.25em;
+}
+
+.change-currency-title {
+  font-size: 1.5rem;
+}
+
+.currency-value {
+  font-size: 1.2rem;
+}
+
+/* Dishes filters */
 .dishes-filters {
   padding: 0 1em;
 }
 
-.show-filters-button {
-  text-align: left;
-  margin: 1em 0;
+/* Dishes cards */
+.dishes-container {
+  min-height: 100vh;
+  padding: 1em;
 }
 
 .dishes-cards {
@@ -71,17 +93,14 @@
   margin: 2em 0;
 }
 
-.flex-spacer {
-  flex: 1 1 auto;
-}
-
 .dish-price-title {
   font-size: 1.1rem;
-  margin-bottom: 0;
+  margin-bottom: 0.5em;
 }
 
 .dish-price-value {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 0;
 }
 
@@ -96,4 +115,3 @@
     flex-basis: 95%;
   }
 }
-

@@ -1,0 +1,38 @@
+<section class="filters">
+  <h2 class="filter-main-title">Filters:</h2>
+  <h3 class="filter-title">Cuisine:</h3>
+  <mat-checkbox *ngFor="let cuisine of uniqueCuisines"
+                (change)="getFilteredCuisines(cuisine)">
+    {{cuisine}}
+  </mat-checkbox>
+
+  <h3 class="filter-title">Category:</h3>
+  <mat-checkbox *ngFor="let category of uniqueCategories"
+                (change)="getFilteredCategories(category)">
+    {{category}}
+  </mat-checkbox>
+
+  <h3 class="filter-title">Price:</h3>
+      <div>
+        <label>From: </label>
+        <label>{{dishesInfo.filterMinPrice}}</label>
+      </div>
+      <mat-slider
+        [min]="dishesInfo.getDishPrice(dishesInfo.minPrice)"
+        [max]="dishesInfo.filterMaxPrice"
+        (change)="filterDishes()"
+        [thumbLabel]="true"
+        [(ngModel)]="dishesInfo.filterMinPrice">
+      </mat-slider>
+      <div>
+        <label>To: </label>
+        <label>{{dishesInfo.filterMaxPrice}}</label>
+      </div>
+      <mat-slider
+        [min]="dishesInfo.filterMinPrice"
+        [max]="dishesInfo.getDishPrice(dishesInfo.maxPrice)"
+        (change)="filterDishes()"
+        [thumbLabel]="true"
+        [(ngModel)]="dishesInfo.filterMaxPrice">
+      </mat-slider>
+</section>

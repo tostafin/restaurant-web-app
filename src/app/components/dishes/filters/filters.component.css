@@ -1,0 +1,19 @@
+.filters {
+  padding: 1em 1.5em;
+  font-size: 1.4rem;
+}
+
+.filter-main-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.filters h3,
+.filters .mat-checkbox {
+  display: block;
+}
+
+.filter-title {
+  margin-top: 1em;
+  font-size: 1.5rem;
+}

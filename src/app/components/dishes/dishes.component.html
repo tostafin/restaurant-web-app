@@ -1,16 +1,27 @@
 <mat-progress-bar *ngIf="!dishes.length"></mat-progress-bar>
-<mat-drawer-container hasBackdrop="true" autosize>
-  <mat-drawer #drawer mode="over" class="dishes-filters">
-    <h3>Filters</h3>
-  </mat-drawer>
+
+<header class="dishes-header">
   <button class="show-filters-button" type="button" mat-button (click)="drawer.toggle()">
-    Show filters
+    <mat-icon>filter_alt</mat-icon>Show filters
   </button>
+  <span class="flex-spacer"></span>
+  <div class="currency-block">
+    <h3 class="change-currency-title">Change currency:</h3>
+    <mat-button-toggle-group [value]="dishesInfo.currCurrency" (change)="dishesInfo.changeCurrCurrency()">
+      <mat-button-toggle value="USD" class="currency-value">USD</mat-button-toggle>
+      <mat-button-toggle value="EUR" class="currency-value">EUR</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</header>
+
+<mat-drawer-container hasBackdrop="true" autosize>
+  <mat-drawer #drawer mode="side" class="dishes-filters">
+    <app-filters [dishes]="dishes" (filteredDishesEvent)="getFilteredDishes($event)"></app-filters>
+  </mat-drawer>
   <section class="dishes-container">
     <main class="dishes-cards">
       <div class="dish-card"
-           *ngFor="let dish of dishes"
-      >
+           *ngFor="let dish of filteredDishes">
         <figure class="dish-figure">
           <picture class="dish-image">
             <source media="(max-width: 768px)" srcset="{{getImageUrl(dish.id, '1')}}">
@@ -18,6 +29,7 @@
             <img src="{{getImageUrl(dish.id, '0')}}" alt="{{dish.name}}">
           </picture>
         </figure>
+
         <div class="dish-info">
           <ul class="dish-categories">
             <li *ngFor="let category of dish.category">{{category}}</li>
@@ -28,7 +40,7 @@
           <div class="dish-price-and-cart">
             <div class="dish-price-block">
               <p class="dish-price-title">Price:</p>
-              <p class="dish-price-value">${{dish.price}}</p>
+              <p class="dish-price-value">{{dishesInfo.getDishPrice(dish.price)}} {{dishesInfo.currCurrency}}</p>
             </div>
             <span class="flex-spacer"></span>
             <mat-icon class="dish-add-to-cart">add_shopping_cart</mat-icon>
