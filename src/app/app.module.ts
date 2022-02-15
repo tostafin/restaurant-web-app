@@ -8,6 +8,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DishesComponent } from './components/dishes/dishes.component';
 import { FiltersComponent } from './components/dishes/filters/filters.component';
+import { DishDetailComponent } from './components/dish-detail/dish-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from "@angular/fire/compat";
@@ -29,7 +30,8 @@ import { MatSliderModule } from "@angular/material/slider";
     HomepageComponent,
     NavbarComponent,
     DishesComponent,
-    FiltersComponent
+    FiltersComponent,
+    DishDetailComponent
   ],
   imports: [
     BrowserModule,

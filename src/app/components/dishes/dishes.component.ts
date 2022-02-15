@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Dish } from "../../interfaces/dish";
 import { DishService } from "../../services/dish.service";
 import { DishesInfoService } from "../../services/dishes-info.service";
+import { Router } from "@angular/router";
+import { logEvent } from "@angular/fire/analytics";
 
 @Component({
   selector: 'app-dishes',
@@ -13,7 +15,8 @@ export class DishesComponent implements OnInit {
   filteredDishes: Dish[] = [];
 
   constructor(private dishService: DishService,
-              public dishesInfo: DishesInfoService) {
+              public dishesInfo: DishesInfoService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,10 +35,11 @@ export class DishesComponent implements OnInit {
     this.filteredDishes = filteredDishes;
   }
 
-  // Dish cards
-  getImageUrl(dishId: string | undefined, idx: string): string {
-    return "https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fdishes%2F" + dishId + "-" +
-      idx + ".jpg?alt=media";
+  goToDishDetails(dishName: string, dishId: string | undefined) {
+    this.router.navigate(["dishes/" + dishName.replace(/\s+/g, '-').toLowerCase(),
+      { dishId: dishId }])
+      .then(() => console.log("Add SnackBar later"))
+      .catch(e => console.error(e));
   }
 
 }

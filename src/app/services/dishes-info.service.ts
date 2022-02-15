@@ -45,9 +45,14 @@ export class DishesInfoService {
     return Math.ceil(price * this.exchangeRate);
   }
 
+  getImageUrl(dishId: string | undefined, idx: number): string {
+    return "https://firebasestorage.googleapis.com/v0/b/restaurant-it.appspot.com/o/images%2Fdishes%2F" + dishId + "-" +
+      idx.toString() + ".jpg?alt=media";
+  }
+
   getMinAndMaxPrice(): void {
     const numOfDishes: number = this.dishes.length;
-    let startIdx: number = -1;
+    let startIdx: number;
     if (numOfDishes % 2 === 0) {
       if (this.dishes[0].price < this.dishes[1].price) {
         this.minPrice = this.dishes[0].price;
@@ -75,4 +80,5 @@ export class DishesInfoService {
     this.filterMinPrice = this.minPrice;
     this.filterMaxPrice = this.maxPrice;
   }
+
 }

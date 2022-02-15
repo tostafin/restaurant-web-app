@@ -32,6 +32,7 @@
 .dishes-container {
   min-height: 100vh;
   padding: 1em;
+  cursor: pointer;
 }
 
 .dishes-cards {
@@ -60,11 +61,6 @@
   padding: 0 0.5em;
 }
 
-.dish-name {
-  font-size: 2rem;
-  padding: 0.5em 0;
-}
-
 .dish-categories {
   margin-top: 0.5em;
 }
@@ -77,6 +73,11 @@
   border-radius: 999em;
   background-color: #595959;
   font-size: 1.3rem;
+}
+
+.dish-name {
+  font-size: 2rem;
+  padding: 0.5em 0;
 }
 
 .dish-cuisine {

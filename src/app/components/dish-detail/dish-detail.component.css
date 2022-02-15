@@ -1,0 +1,137 @@
+.go-back-button {
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.dish-detail-container {
+  display: flex;
+  margin-top: 4em;
+  padding: 0 1em;
+}
+
+.dish-figure {
+  flex-basis: 35%;
+}
+
+.dish-image source,
+.dish-image img {
+  width: 100%;
+  height: auto;
+}
+
+.arrows-container {
+  text-align: center;
+}
+
+.image-arrow {
+  cursor: pointer;
+}
+
+.dish-block {
+  flex-basis: 65%;
+  display: flex;
+  padding: 0 6em;
+}
+
+.dish-info {
+  flex-basis: 70%;
+}
+
+.dish-categories {
+  margin-top: 0.5em;
+}
+
+.dish-categories li {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  border-radius: 999em;
+  background-color: #595959;
+  font-size: 1.5rem;
+}
+
+.dish-name {
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 0.5em 0;
+  margin-bottom: 0.5em;
+}
+
+.dish-cuisine {
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+
+.dish-ingredients-title {
+  font-size: 1.8rem;
+}
+
+.dish-ingredients-list li {
+  font-size: 1.6rem;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+
+.dish-order {
+  flex-basis: 30%;
+}
+
+@media screen and (max-width: 1400px) {
+  .dish-categories li {
+    font-size: 1.4vw;
+  }
+
+  .dish-name {
+    font-size: 2.2vw;
+  }
+
+  .dish-cuisine {
+    font-size: 1.7vw;
+  }
+
+  .dish-ingredients-list li {
+    font-size: 1.4vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dish-detail-container {
+    flex-direction: column;
+  }
+
+  .dish-figure {
+    flex-basis: 100%;
+  }
+
+  .dish-block {
+    flex-basis: 100%;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .dish-info {
+    flex-basis: 100%;
+    margin-bottom: 2em;
+  }
+
+  .dish-order {
+    flex-basis: 100%;
+  }
+
+  .dish-categories li {
+    font-size: 1.5rem;
+  }
+
+  .dish-name {
+    font-size: 3rem;
+  }
+
+  .dish-cuisine {
+    font-size: 2rem;
+  }
+
+  .dish-ingredients-list li {
+    font-size: 1.5rem;
+  }
+}

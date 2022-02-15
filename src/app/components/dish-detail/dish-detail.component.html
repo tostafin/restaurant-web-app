@@ -1,0 +1,35 @@
+<mat-progress-bar *ngIf="!dish"></mat-progress-bar>
+<button mat-raised-button
+        color="primary"
+        class="go-back-button"
+        (click)="goBack()">Go back
+</button>
+<section *ngIf="dish" class="dish-detail-container">
+  <figure class="dish-figure">
+    <picture class="dish-image">
+      <source media="(max-width: 768px)" srcset="{{dishesInfo.getImageUrl(dish.id, dishImageIdx + 1)}}">
+      <source media="(min-width: 769px)" srcset="{{dishesInfo.getImageUrl(dish.id, dishImageIdx)}}">
+      <img src="{{dishesInfo.getImageUrl(dish.id, dishImageIdx)}}" alt="{{dish.name}}">
+    </picture>
+    <figcaption class="arrows-container">
+      <mat-icon (click)="changeImage('left')" class="image-arrow">navigate_before</mat-icon>
+      <mat-icon (click)="changeImage('right')" class="image-arrow">navigate_next</mat-icon>
+    </figcaption>
+  </figure>
+  <main class="dish-block">
+    <div class="dish-info">
+      <ul class="dish-categories">
+        <li *ngFor="let category of dish.category">{{category}}</li>
+      </ul>
+      <h1 class="dish-name">{{dish.name | uppercase}}</h1>
+      <h2 class="dish-cuisine">{{dish.cuisine | uppercase}} CUISINE</h2>
+      <h3 class="dish-ingredients-title">Ingredients:</h3>
+      <ul class="dish-ingredients-list">
+        <li *ngFor="let ingredient of dish.ingredients">{{ingredient}}</li>
+      </ul>
+    </div>
+    <div class="dish-order">
+      <p>Order:</p>
+    </div>
+  </main>
+</section>
