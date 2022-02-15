@@ -46,7 +46,22 @@ export class DishesInfoService {
   }
 
   getMinAndMaxPrice(): void {
-    for (let i = 1; i < this.dishes.length; i += 2) {
+    const numOfDishes: number = this.dishes.length;
+    let startIdx: number = -1;
+    if (numOfDishes % 2 === 0) {
+      if (this.dishes[0].price < this.dishes[1].price) {
+        this.minPrice = this.dishes[0].price;
+        this.maxPrice = this.dishes[1].price;
+      } else {
+        this.minPrice = this.dishes[1].price;
+        this.maxPrice = this.dishes[0].price;
+      }
+      startIdx = 2;
+    } else {
+      this.minPrice = this.maxPrice = this.dishes[0].price;
+      startIdx = 1;
+    }
+    for (let i = startIdx; i < this.dishes.length - 1; i += 2) {
       if (this.dishes[i].price < this.dishes[i + 1].price) {
         if (this.dishes[i].price < this.minPrice) this.minPrice = this.dishes[i].price;
 
