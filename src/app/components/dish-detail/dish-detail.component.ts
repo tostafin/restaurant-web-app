@@ -18,7 +18,7 @@ export class DishDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private dishService: DishService,
-              public dishesInfo: DishesInfoService,
+              public dishesInfoService: DishesInfoService,
               private location: Location
   ) {
   }
@@ -41,11 +41,11 @@ export class DishDetailComponent implements OnInit {
 
   changeImage(arrow: string): void {
     if (arrow === "left") {
-      this.dishImageIdx = Math.abs(this.dishImageIdx - this.dishesInfo.numOfSourceSets) %
-        (this.dish.numOfImages * this.dishesInfo.numOfSourceSets);
+      this.dishImageIdx = Math.abs(this.dishImageIdx - this.dishesInfoService.numOfSourceSets) %
+        (this.dish.numOfImages * this.dishesInfoService.numOfSourceSets);
     } else if (arrow === "right") {
-      this.dishImageIdx = Math.abs(this.dishImageIdx + this.dishesInfo.numOfSourceSets) %
-        (this.dish.numOfImages * this.dishesInfo.numOfSourceSets);
+      this.dishImageIdx = Math.abs(this.dishImageIdx + this.dishesInfoService.numOfSourceSets) %
+        (this.dish.numOfImages * this.dishesInfoService.numOfSourceSets);
     }
   }
 

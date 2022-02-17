@@ -9,7 +9,7 @@
   <span class="flex-spacer"></span>
   <div class="currency-block">
     <h3 class="change-currency-title">Change currency:</h3>
-    <mat-button-toggle-group [value]="dishesInfo.currCurrency" (change)="dishesInfo.changeCurrCurrency()">
+    <mat-button-toggle-group [value]="dishesInfoService.currCurrency" (change)="dishesInfoService.changeCurrCurrency()">
       <mat-button-toggle value="USD" class="currency-value">USD</mat-button-toggle>
       <mat-button-toggle value="EUR" class="currency-value">EUR</mat-button-toggle>
     </mat-button-toggle-group>
@@ -19,9 +19,9 @@
 <section *ngIf="dish" class="dish-detail-container">
   <figure class="dish-figure">
     <picture class="dish-image">
-      <source media="(max-width: 768px)" srcset="{{dishesInfo.getImageUrl(dish.id, dishImageIdx + 1)}}">
-      <source media="(min-width: 769px)" srcset="{{dishesInfo.getImageUrl(dish.id, dishImageIdx)}}">
-      <img src="{{dishesInfo.getImageUrl(dish.id, dishImageIdx)}}" alt="{{dish.name}}">
+      <source media="(max-width: 768px)" srcset="{{dishesInfoService.getImageUrl(dish.id, dishImageIdx + 1)}}">
+      <source media="(min-width: 769px)" srcset="{{dishesInfoService.getImageUrl(dish.id, dishImageIdx)}}">
+      <img src="{{dishesInfoService.getImageUrl(dish.id, dishImageIdx)}}" alt="{{dish.name}}">
     </picture>
     <figcaption class="arrows-container">
       <mat-icon (click)="changeImage('left')" class="image-arrow">navigate_before</mat-icon>
@@ -39,6 +39,7 @@
       <ul class="dish-ingredients-list">
         <li *ngFor="let ingredient of dish.ingredients">{{ingredient}}</li>
       </ul>
+      <p class="dish-description">{{dish.description}}</p>
     </div>
     <div class="dish-order">
       <p>Order:</p>

@@ -1,0 +1,27 @@
+<mat-progress-bar *ngIf="!dishes.length"></mat-progress-bar>
+
+<button mat-raised-button
+        #goBackTrigger
+        color="primary"
+        class="go-back-button"
+        (click)="goBack()">Go back
+</button>
+
+<section>
+  <main class="edit-dishes-main" *ngIf="dishes.length">
+    <div class="dish-card" *ngFor="let dish of dishes">
+      <figure class="dish-figure">
+        <picture class="dish-image">
+          <source media="(max-width: 768px)" srcset="{{dishesInfoService.getImageUrl(dish.id, 1)}}">
+          <source media="(min-width: 769px)" srcset="{{dishesInfoService.getImageUrl(dish.id, 0)}}">
+          <img src="{{dishesInfoService.getImageUrl(dish.id, 0)}}" alt="{{dish.name}}">
+        </picture>
+      </figure>
+      <h2 class="dish-name">{{dish.name}}</h2>
+      <div class="buttons-container">
+        <button mat-raised-button color="accent" (click)="openUpdateDialog(dish)">Update dish</button>
+        <button mat-raised-button color="warn" (click)="openDeleteDialog(dish)">Delete dish</button>
+      </div>
+    </div>
+  </main>
+</section>

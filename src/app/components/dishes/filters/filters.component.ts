@@ -53,7 +53,7 @@ export class FiltersComponent implements OnInit, OnChanges {
     this.filterDishes();
   }
 
-  getFilteredCategories(category: string) {
+  getFilteredCategories(category: string): void {
     if (this.filteredCategories.has(category)) this.filteredCategories.delete(category);
     else this.filteredCategories.add(category);
     this.filterDishes();

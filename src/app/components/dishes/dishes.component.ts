@@ -3,7 +3,6 @@ import { Dish } from "../../interfaces/dish";
 import { DishService } from "../../services/dish.service";
 import { DishesInfoService } from "../../services/dishes-info.service";
 import { Router } from "@angular/router";
-import { logEvent } from "@angular/fire/analytics";
 
 @Component({
   selector: 'app-dishes',
@@ -15,13 +14,14 @@ export class DishesComponent implements OnInit {
   filteredDishes: Dish[] = [];
 
   constructor(private dishService: DishService,
-              public dishesInfo: DishesInfoService,
-              private router: Router) {
+              public dishesInfoService: DishesInfoService,
+              private router: Router
+  ) {
   }
 
   ngOnInit(): void {
     this.getDishes();
-    this.dishesInfo.getDishesInfo();
+    this.dishesInfoService.getDishesInfo();
   }
 
   getDishes(): void {

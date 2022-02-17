@@ -1,6 +1,6 @@
 .add-dish-container {
   text-align: center;
-  padding: 1em;
+  margin: 1em 1em 3em 1em;
   font-size: 1.2rem;
 }
 
@@ -29,8 +29,8 @@
   line-height: 1.3;
 }
 
-.form-array-button {
-  margin-top: 1em;
+.add-field-button {
+  margin: 1em 0;
 }
 
 .image-input-fields {

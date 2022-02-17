@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { finalize, map, Observable } from "rxjs";
+import { lastValueFrom, map, Observable } from "rxjs";
 import { Dish } from "../interfaces/dish";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
-import firebase from "firebase/compat";
-import DocumentReference = firebase.firestore.DocumentReference;
-import { rejects } from "assert";
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +32,7 @@ export class DishService {
     const imagesToUpload: Promise<void>[] = [];
     for (let i = 0; i < images.length; i++) {
       const uploadImage = new Promise<void>((resolve, reject) => {
-        this.storage.upload("images/dishes/" + addToAfs.id + "-" + i.toString() + "." +
-          images[i].name.slice((images[i].name.lastIndexOf(".") - 1 >>> 0) + 2), images[i])
+        this.storage.upload("images/dishes/" + addToAfs.id + "-" + i.toString() + ".jpg", images[i])
           .then(() => resolve())
           .catch(() => reject());
       })
@@ -45,8 +41,19 @@ export class DishService {
     return Promise.all(imagesToUpload);
   }
 
-  deleteDish(dish: Dish) {
-    return this.storage.ref("images/dishes/example1").delete();
+  updateDish(dish: Dish, dishId: string | undefined) {
+    return this.afs.collection<Dish>(this.collectionName).doc(dishId).update(dish);
+  }
+
+  async deleteDish(dish: Dish, numOfSourceSets: number) {
+    await this.afs.collection<Dish>(this.collectionName).doc(dish.id).delete();
+    const imagesToRemove: Promise<void>[] = [];
+    for (let i = 0; i < dish.numOfImages * numOfSourceSets; i++) {
+      const removeImage = lastValueFrom(this.storage.ref("images/dishes/" + dish.id + "-" + i.toString() + ".jpg")
+        .delete());
+      imagesToRemove.push(removeImage);
+    }
+    return Promise.all(imagesToRemove);
   }
 
 }

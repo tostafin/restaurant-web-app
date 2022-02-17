@@ -1,12 +1,8 @@
-<button mat-raised-button
-        color="primary"
-        class="go-back-button"
-        (click)="goBack()">Go back
-</button>
+<h1 mat-dialog-title>Update {{data.dish.name}}</h1>
+<mat-error class="valid-form" *ngIf="!updateDishForm.valid">The form must be valid in order to be submitted.</mat-error>
 
-<section class="add-dish-container">
-  <h1>Add a new dish:</h1>
-  <form [formGroup]="addDishForm" (ngSubmit)="onSubmit()" class="add-dish-form">
+<mat-dialog-content>
+  <form [formGroup]="updateDishForm" class="update-dish-form">
     <mat-form-field appearance="legacy">
       <mat-label>Dish name</mat-label>
       <input matInput id="name" type="text" formControlName="name">
@@ -28,12 +24,15 @@
     </div>
 
     <div formArrayName="categories" class="form-array-containers">
-      <button class="form-array-button" mat-raised-button type="button" (click)="addCategory()">
+      <button class="add-field-button" mat-raised-button type="button" (click)="addCategory()">
         + Add another category
       </button>
       <mat-form-field appearance="legacy" *ngFor="let category of categories.controls; let i=index">
         <mat-label>Category</mat-label>
         <input matInput id="category-{{i}}" type="text" [formControlName]="i">
+        <button *ngIf="i !== 0" mat-icon-button matSuffix (click)="removeCategory(i)">
+          <mat-icon class="remove-field-icon">delete_outline</mat-icon>
+        </button>
       </mat-form-field>
       <div class="error-message">
         <mat-error *ngIf="categories?.touched && categories?.invalid">
@@ -43,12 +42,15 @@
     </div>
 
     <div formArrayName="ingredients" class="form-array-containers">
-      <button class="form-array-button" mat-raised-button type="button" (click)="addIngredient()">
+      <button class="add-field-button" mat-raised-button type="button" (click)="addIngredient()">
         + Add another ingredient
       </button>
       <mat-form-field appearance="legacy" *ngFor="let ingredient of ingredients.controls; let i=index">
         <mat-label>Ingredient</mat-label>
         <input matInput id="ingredients" type="text" [formControlName]="i">
+        <button *ngIf="i !== 0" mat-icon-button matSuffix (click)="removeIngredients(i)">
+          <mat-icon class="remove-field-icon">delete_outline</mat-icon>
+        </button>
       </mat-form-field>
       <div class="error-message">
         <mat-error *ngIf="ingredients?.touched && ingredients?.invalid">
@@ -79,7 +81,7 @@
 
     <mat-form-field appearance="legacy">
       <mat-label>Short description</mat-label>
-      <input matInput id="description" type="text" formControlName="description">
+      <textarea matInput id="description" type="text" formControlName="description"></textarea>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="description?.touched && description?.invalid">
@@ -88,38 +90,12 @@
       </mat-error>
     </div>
 
-    <div formArrayName="images" class="form-array-containers">
-      <h2>Images</h2>
-      <p class="form-array-instruction">
-        Click the button below to add a new image. Each image is represented by the number in front of the dash, e.g.
-        <em>Image 0-3</em> means it's a picture number 0. Add images starting with the largest in *-0, ending with the
-        smallest in *-{{dishesInfoService.numOfSourceSets - 1}}. That means <em>Image 0-3</em> is the 3rd largest
-        picture number 0. Only <code>.jpg</code> images are accepted.
-      </p>
-      <button class="form-array-button" type="button" mat-raised-button (click)="addImage()">
-        + Add another image
-      </button>
-      <div *ngFor="let imageNum of imagesNumArr" class="image-input-fields">
-        <div class="src-set-files" *ngFor="let srcset of sourceSets">
-          <label>Image {{imageNum}}-{{srcset}}:</label>
-          <input id="image-{{imageNum}}-{{srcset}}"
-                 type="file"
-                 (change)="addUploadedFile($event, imageNum, srcset)"
-                 accept=".jpg">
-        </div>
-      </div>
-    </div>
-    <div class="error-message">
-      <mat-error *ngIf="images?.enabled && images?.invalid">
-        You must upload images in all sizes.
-      </mat-error>
-    </div>
-
-    <div class="button-container">
-      <mat-error class="error-message" *ngIf="!addDishForm.valid">
-        The form must be valid in order to be submitted.
-      </mat-error>
-      <button mat-raised-button color="accent" type="submit" [disabled]="!addDishForm.valid">Add a new dish</button>
-    </div>
   </form>
-</section>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button color="warn" [mat-dialog-close]="false">Exit</button>
+  <button [disabled]="!updateDishForm.valid"
+          mat-stroked-button color="accent"
+          [mat-dialog-close]="updateDishForm.value">Update
+  </button>
+</mat-dialog-actions>

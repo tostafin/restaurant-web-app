@@ -11,6 +11,7 @@ import { FiltersComponent } from './components/dishes/filters/filters.component'
 import { DishDetailComponent } from './components/dish-detail/dish-detail.component';
 import { DishesManagerComponent } from './components/dishes-manager/dishes-manager.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
+import { EditDishesComponent } from './components/edit-dishes/edit-dishes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from "@angular/fire/compat";
@@ -29,6 +30,10 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DeleteDishDialogComponent } from './components/edit-dishes/delete-dish-dialog/delete-dish-dialog.component';
+import { UpdateDishDialogComponent } from './components/edit-dishes/update-dish-dialog/update-dish-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     FiltersComponent,
     DishDetailComponent,
     DishesManagerComponent,
-    AddDishComponent
+    AddDishComponent,
+    EditDishesComponent,
+    DeleteDishDialogComponent,
+    UpdateDishDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +68,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

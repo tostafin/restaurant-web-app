@@ -9,9 +9,9 @@
   padding: 3em;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .dishes-manager-main button {
-    font-size: 8vw;
+    font-size: 5vw;
     padding: 2em;
   }
 }

@@ -4,7 +4,6 @@ import { DishesInfoService } from "../../services/dishes-info.service";
 import { Location } from "@angular/common";
 import { DishService } from "../../services/dish.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { log } from "util";
 
 @Component({
   selector: 'app-add-dish',
@@ -35,11 +34,11 @@ export class AddDishComponent implements OnInit {
   })
 
   imagesNumArr: number[] = [];
-  sourceSets: number[] = Array(this.dishesInfo.numOfSourceSets).fill(0).map((x, i) => i);
+  sourceSets: number[] = Array(this.dishesInfoService.numOfSourceSets).fill(0).map((x, i) => i);
   numOfAddedImages: number = 0;
 
   constructor(private fb: FormBuilder,
-              public dishesInfo: DishesInfoService,
+              public dishesInfoService: DishesInfoService,
               private dishService: DishService,
               private location: Location,
               private snackBar: MatSnackBar
@@ -53,14 +52,6 @@ export class AddDishComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-  uploadFile(event: Event): void {
-    if (!(event.target instanceof HTMLInputElement) || !(event.target.files)) return;
-    const file = event.target.files[0];
-    const filePath = "images/dishes/example1";
-    // const task = ;
-  }
-
 
   get name() {
     return this.addDishForm.get('name');
@@ -103,7 +94,7 @@ export class AddDishComponent implements OnInit {
   }
 
   addImage(): void {
-    for (let i = 0; i < this.dishesInfo.numOfSourceSets; i++) {
+    for (let i = 0; i < this.dishesInfoService.numOfSourceSets; i++) {
       this.images.push(this.fb.control('', Validators.required));
     }
     this.imagesNumArr.push(this.numOfAddedImages++);
@@ -111,7 +102,7 @@ export class AddDishComponent implements OnInit {
 
   addUploadedFile(event: Event, imageNum: number, srcset: number): void {
     if (!(event.target instanceof HTMLInputElement) || !(event.target.files)) return;
-    this.images.at(imageNum * this.dishesInfo.numOfSourceSets + srcset).setValue(event.target.files[0]);
+    this.images.at(imageNum * this.dishesInfoService.numOfSourceSets + srcset).setValue(event.target.files[0]);
   }
 
   addDishMessage(message: string) {
@@ -122,7 +113,7 @@ export class AddDishComponent implements OnInit {
 
   onSubmit(): void {
     let {images, ...newDish} = this.addDishForm.value;
-    newDish["numOfImages"] = this.images.controls.length / this.dishesInfo.numOfSourceSets;
+    newDish["numOfImages"] = this.images.controls.length / this.dishesInfoService.numOfSourceSets;
     this.dishService.addDish(newDish, images)
       .then(() => this.addDishMessage("The dish was added successfully."))
       .catch(e => this.addDishMessage("An error occurred while adding a new dish: " + e));

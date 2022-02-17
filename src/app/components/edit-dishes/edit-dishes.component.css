@@ -1,0 +1,74 @@
+.go-back-button {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.edit-dishes-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #424242;
+  margin: 1em 2em;
+  padding: 1em;
+}
+
+.dish-figure {
+  flex-basis: 30%;
+}
+
+.dish-image source,
+.dish-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dish-name {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons-container button {
+  margin: 1em 0;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .dish-name {
+    font-size: 4vw;
+  }
+
+  .buttons-container button {
+    font-size: 2.5vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dish-card {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .dish-figure {
+    margin-bottom: 2em;
+  }
+
+  .dish-name {
+    margin-bottom: 1em;
+    font-size: 6vw;
+  }
+
+  .buttons-container button {
+    font-size: 3.5vw;
+  }
+}

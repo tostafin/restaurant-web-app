@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Remove {{data.name}}?</h1>
+<mat-dialog-content>
+  If you remove this dish, customers won't be able to order it. Continue?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button color="warn" [mat-dialog-close]="false">No</button>
+  <button mat-stroked-button color="accent" [mat-dialog-close]="true">Yes</button>
+</mat-dialog-actions>
