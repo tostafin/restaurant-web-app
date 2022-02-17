@@ -41,7 +41,7 @@ export class FiltersComponent implements OnInit, OnChanges {
   getUniqueCategories(): void {
     this.uniqueCategories = new Set<string>();
     for (let dish of this.dishes) {
-      for (let category of dish.category) {
+      for (let category of dish.categories) {
         this.uniqueCategories.add(category);
       }
     }
@@ -87,7 +87,7 @@ export class FiltersComponent implements OnInit, OnChanges {
     return dishes.filter(dish => {
       let found: boolean = false;
       for (let category of this.filteredCategories) {
-        if (dish.category.includes(category)) {
+        if (dish.categories.includes(category)) {
           found = true;
           break;
         }

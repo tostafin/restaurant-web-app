@@ -1,6 +1,25 @@
+.dish-detail-header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 .go-back-button {
-  margin-top: 1em;
   margin-left: 1em;
+  font-size: 1.2rem;
+}
+
+.currency-block {
+  margin-right: 1em;
+  margin-top: 1em;
+}
+
+.change-currency-title {
+  font-size: 1.5rem;
+}
+
+.currency-value {
+  font-size: 1.2rem;
 }
 
 .dish-detail-container {

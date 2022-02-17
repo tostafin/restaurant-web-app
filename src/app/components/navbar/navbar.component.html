@@ -1,6 +1,7 @@
 <nav class="primary-navbar">
   <a routerLinkActive="active-link" routerLink="/homepage">Homepage</a>
   <a routerLinkActive="active-link" routerLink="/dishes">Menu</a>
+  <a routerLinkActive="active-link" routerLink="/dishes-manager">Dishes Manager</a>
   <span class="flex-spacer"></span>
   <a>Log in</a>
   <a>Register</a>
@@ -19,6 +20,10 @@
     <button mat-menu-item routerLink="/dishes">
       <mat-icon>menu_book</mat-icon>
       <span>Menu</span>
+    </button>
+    <button mat-menu-item routerLink="/dishes-manager">
+      <mat-icon>restaurant_menu</mat-icon>
+      <span>Dishes Manager</span>
     </button>
   </mat-menu>
 </nav>

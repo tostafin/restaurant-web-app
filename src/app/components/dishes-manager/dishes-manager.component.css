@@ -1,0 +1,17 @@
+.dishes-manager-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.dishes-manager-main button {
+  font-size: 2rem;
+  margin-top: 2em;
+  padding: 3em;
+}
+
+@media screen and (max-width: 500px) {
+  .dishes-manager-main button {
+    font-size: 8vw;
+    padding: 2em;
+  }
+}

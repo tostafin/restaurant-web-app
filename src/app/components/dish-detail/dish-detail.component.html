@@ -1,9 +1,21 @@
 <mat-progress-bar *ngIf="!dish"></mat-progress-bar>
-<button mat-raised-button
-        color="primary"
-        class="go-back-button"
-        (click)="goBack()">Go back
-</button>
+
+<header class="dish-detail-header">
+  <button mat-raised-button
+          color="primary"
+          class="go-back-button"
+          (click)="goBack()">Go back
+  </button>
+  <span class="flex-spacer"></span>
+  <div class="currency-block">
+    <h3 class="change-currency-title">Change currency:</h3>
+    <mat-button-toggle-group [value]="dishesInfo.currCurrency" (change)="dishesInfo.changeCurrCurrency()">
+      <mat-button-toggle value="USD" class="currency-value">USD</mat-button-toggle>
+      <mat-button-toggle value="EUR" class="currency-value">EUR</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</header>
+
 <section *ngIf="dish" class="dish-detail-container">
   <figure class="dish-figure">
     <picture class="dish-image">
@@ -19,7 +31,7 @@
   <main class="dish-block">
     <div class="dish-info">
       <ul class="dish-categories">
-        <li *ngFor="let category of dish.category">{{category}}</li>
+        <li *ngFor="let category of dish.categories">{{category}}</li>
       </ul>
       <h1 class="dish-name">{{dish.name | uppercase}}</h1>
       <h2 class="dish-cuisine">{{dish.cuisine | uppercase}} CUISINE</h2>

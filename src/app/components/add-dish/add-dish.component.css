@@ -1,0 +1,53 @@
+.add-dish-container {
+  text-align: center;
+  padding: 1em;
+  font-size: 1.2rem;
+}
+
+.go-back-button {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+.add-dish-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-dish-form mat-form-field,
+.form-array-containers,
+.error-message {
+  width: 50vw;
+}
+
+.error-message {
+  margin-bottom: 1em;
+}
+
+.form-array-instruction {
+  line-height: 1.3;
+}
+
+.form-array-button {
+  margin-top: 1em;
+}
+
+.image-input-fields {
+  margin: 1em 0;
+}
+
+.src-set-files {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .add-dish-form mat-form-field,
+  .form-array-containers,
+  .error-message {
+    width: 75vw;
+  }
+}

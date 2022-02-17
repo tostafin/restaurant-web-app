@@ -16,6 +16,8 @@ export class DishesInfoService {
   filterMaxPrice: number = -1;
   filterMinPrice: number = Number.MAX_SAFE_INTEGER;
 
+  readonly numOfSourceSets: number = 2;
+
   constructor(private dishService: DishService) {
   }
 

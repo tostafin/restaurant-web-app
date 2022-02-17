@@ -14,14 +14,14 @@ import { Location } from "@angular/common";
 export class DishDetailComponent implements OnInit {
   dish!: Dish;
   dishImageIdx: number = 0;
-  readonly numOfImages: number = 2;
-  readonly numOfSourceSets: number = 2;
+
 
   constructor(private route: ActivatedRoute,
               private dishService: DishService,
               public dishesInfo: DishesInfoService,
               private location: Location
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getCurrDish();
@@ -39,11 +39,14 @@ export class DishDetailComponent implements OnInit {
     });
   }
 
-  changeImage(arrow: string) {
-    if (arrow === "left") this.dishImageIdx =
-      Math.abs(this.dishImageIdx - this.numOfSourceSets) % (this.numOfImages * this.numOfSourceSets);
-    else if (arrow === "right") this.dishImageIdx =
-      Math.abs(this.dishImageIdx + this.numOfSourceSets) % (this.numOfImages * this.numOfSourceSets);
+  changeImage(arrow: string): void {
+    if (arrow === "left") {
+      this.dishImageIdx = Math.abs(this.dishImageIdx - this.dishesInfo.numOfSourceSets) %
+        (this.dish.numOfImages * this.dishesInfo.numOfSourceSets);
+    } else if (arrow === "right") {
+      this.dishImageIdx = Math.abs(this.dishImageIdx + this.dishesInfo.numOfSourceSets) %
+        (this.dish.numOfImages * this.dishesInfo.numOfSourceSets);
+    }
   }
 
 }
