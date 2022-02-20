@@ -6,6 +6,8 @@ import { DishDetailComponent } from "./components/dish-detail/dish-detail.compon
 import { DishesManagerComponent } from "./components/dishes-manager/dishes-manager.component";
 import { AddDishComponent } from "./components/add-dish/add-dish.component";
 import { EditDishesComponent } from "./components/edit-dishes/edit-dishes.component";
+import { LoginUserComponent } from "./components/login-user/login-user.component";
+import { RegisterUserComponent } from "./components/register-user/register-user.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full' },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'dishes/:name', component: DishDetailComponent },
   { path: 'dishes-manager', component: DishesManagerComponent },
   { path: 'dishes-manager/add-dish', component: AddDishComponent },
-  { path: 'dishes-manager/edit-dishes', component: EditDishesComponent }
+  { path: 'dishes-manager/edit-dishes', component: EditDishesComponent },
+  { path: 'login', component: LoginUserComponent },
+  { path: 'register', component: RegisterUserComponent }
 ];
 
 @NgModule({

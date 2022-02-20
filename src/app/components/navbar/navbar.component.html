@@ -3,8 +3,14 @@
   <a routerLinkActive="active-link" routerLink="/dishes">Menu</a>
   <a routerLinkActive="active-link" routerLink="/dishes-manager">Dishes Manager</a>
   <span class="flex-spacer"></span>
-  <a>Log in</a>
-  <a>Register</a>
+  <div class="user-auth-block" *ngIf="authService.user; else newUser">
+    <h3 class="username">Hello, {{authService.username}}!</h3>
+    <button (click)="authService.signOutUser()">Log out</button>
+  </div>
+  <ng-template class="user-auth-block" #newUser>
+    <a routerLinkActive="active-link" routerLink="/login">Log in</a>
+    <a routerLinkActive="active-link" routerLink="/register">Register</a>
+  </ng-template>
 </nav>
 
 <nav class="secondary-navbar">
@@ -25,5 +31,23 @@
       <mat-icon>restaurant_menu</mat-icon>
       <span>Dishes Manager</span>
     </button>
+    <div *ngIf="authService.user; else newUser">
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+      <span mat-menu-item disabled>Hello, {{authService.username}}!</span>
+    </div>
+    <ng-template #newUser>
+      <button mat-menu-item routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-menu-item routerLink="/register">
+        <mat-icon>person_add</mat-icon>
+        <span>Register</span>
+      </button>
+    </ng-template>
+
   </mat-menu>
 </nav>

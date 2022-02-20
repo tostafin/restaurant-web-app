@@ -15,17 +15,37 @@ nav {
   border-radius: 0.25em;
 }
 
-.primary-navbar a {
-  padding: 0.5em;
+.primary-navbar a,
+.primary-navbar button {
   font-size: 1.4rem;
+  padding: 0.5em;
   text-decoration: none;
   color: white;
   margin: 0 0.25em;
+  border: none;
+  cursor: pointer;
 }
 
-.primary-navbar a:hover {
+.primary-navbar button {
+  background-color: transparent;
+}
+
+.primary-navbar a:hover,
+.primary-navbar button:hover {
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0.25em;
+}
+
+.user-auth-block {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #69f0ae;
+  font-weight: 700;
 }
 
 .secondary-navbar {

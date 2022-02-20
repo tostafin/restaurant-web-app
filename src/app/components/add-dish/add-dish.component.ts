@@ -14,7 +14,7 @@ export class AddDishComponent implements OnInit {
   addDishForm = this.fb.group({
     name: this.fb.control('', [
       Validators.required,
-      Validators.pattern(/^([A-ZÀ-Ž ][a-zà-ž ]+)$/)
+      Validators.pattern(/^([A-ZÀ-Ž' ][a-zà-ž' ]+)$/)
     ]),
     cuisine: this.fb.control('', Validators.required),
     categories: this.fb.array([
@@ -89,8 +89,16 @@ export class AddDishComponent implements OnInit {
     this.categories.push(this.fb.control('', Validators.required));
   }
 
+  removeCategory(idx: number): void {
+    this.categories.removeAt(idx);
+  }
+
   addIngredient(): void {
     this.ingredients.push(this.fb.control('', Validators.required));
+  }
+
+  removeIngredients(idx: number): void {
+    this.ingredients.removeAt(idx);
   }
 
   addImage(): void {

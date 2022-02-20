@@ -50,7 +50,7 @@
   flex-direction: column;
   border: 1px solid #595959;
   cursor: pointer;
-  width: 30vw;
+  width: 29vw;
 }
 
 .dish-image source,
@@ -123,7 +123,7 @@
 @media screen and (max-width: 1024px) {
   .dish-card {
     flex-basis: 45%;
-    width: 45vw;
+    width: 43vw;
   }
 
   .dish-image source,
@@ -139,7 +139,7 @@
 
   .dish-card {
     flex-basis: 95%;
-    width: 95vw;
+    /*width: 95vw;*/
   }
 
   .dish-image source,

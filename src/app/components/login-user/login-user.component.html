@@ -1,0 +1,31 @@
+<section class="login-container">
+  <h1 class="login-title">Log in:</h1>
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail address</mat-label>
+      <input matInput id="email" type="email" formControlName="email" required>
+      <mat-error *ngIf="loginForm.hasError('email', 'email')">
+        Invalid e-mail address format.
+      </mat-error>
+      <mat-error *ngIf="loginForm.hasError('required', 'email')">
+        This field is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput id="password" type="password" formControlName="password" required>
+      <mat-error *ngIf="loginForm.hasError('required', 'password')">
+        This field is required.
+      </mat-error>
+      <mat-error *ngIf="loginForm.hasError('minlength', 'password')">
+        Your password must contain at least 6 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+      Sign in
+    </button>
+  </form>
+  <h3 class="create-account-link">Dont have an account? <a routerLink="/register">Create one!</a></h3>
+</section>

@@ -12,6 +12,11 @@ import { DishDetailComponent } from './components/dish-detail/dish-detail.compon
 import { DishesManagerComponent } from './components/dishes-manager/dishes-manager.component';
 import { AddDishComponent } from './components/add-dish/add-dish.component';
 import { EditDishesComponent } from './components/edit-dishes/edit-dishes.component';
+import { DeleteDishDialogComponent } from './components/edit-dishes/delete-dish-dialog/delete-dish-dialog.component';
+import { UpdateDishDialogComponent } from './components/edit-dishes/update-dish-dialog/update-dish-dialog.component';
+import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { LoginUserComponent } from './components/login-user/login-user.component';
+import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from "@angular/fire/compat";
@@ -31,8 +36,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
-import { DeleteDishDialogComponent } from './components/edit-dishes/delete-dish-dialog/delete-dish-dialog.component';
-import { UpdateDishDialogComponent } from './components/edit-dishes/update-dish-dialog/update-dish-dialog.component';
+
 
 
 @NgModule({
@@ -47,7 +51,10 @@ import { UpdateDishDialogComponent } from './components/edit-dishes/update-dish-
     AddDishComponent,
     EditDishesComponent,
     DeleteDishDialogComponent,
-    UpdateDishDialogComponent
+    UpdateDishDialogComponent,
+    RegisterUserComponent,
+    LoginUserComponent,
+    ConfirmPasswordDirective
   ],
   imports: [
     BrowserModule,

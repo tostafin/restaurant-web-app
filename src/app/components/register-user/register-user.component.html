@@ -1,0 +1,49 @@
+<section class="register-container">
+  <h1 class="register-title">Create a new account:</h1>
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput id="username" type="text" formControlName="username" required>
+      <mat-error *ngIf="registerForm.hasError('required', 'username')">
+        This field is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail address</mat-label>
+      <input matInput id="email" type="email" formControlName="email" required>
+      <mat-error *ngIf="registerForm.hasError('email', 'email')">
+        Invalid e-mail address format.
+      </mat-error>
+      <mat-error *ngIf="registerForm.hasError('required', 'email')">
+        This field is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput id="password" type="password" formControlName="password" required>
+      <mat-error *ngIf="registerForm.hasError('required', 'password')">
+        This field is required.
+      </mat-error>
+      <mat-error *ngIf="registerForm.hasError('minlength', 'password')">
+        Your password must contain at least 6 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm password</mat-label>
+      <input matInput id="confirmedPassword" type="password" formControlName="confirmedPassword" required>
+      <mat-error *ngIf="registerForm.hasError('required', 'confirmedPassword')">
+        This field is required.
+      </mat-error>
+      <mat-error *ngIf="registerForm.hasError('notMatching', 'confirmedPassword')">
+        The entered passwords don't match.
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">
+      Sign up
+    </button>
+  </form>
+</section>

@@ -7,9 +7,9 @@
 <section class="add-dish-container">
   <h1>Add a new dish:</h1>
   <form [formGroup]="addDishForm" (ngSubmit)="onSubmit()" class="add-dish-form">
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Dish name</mat-label>
-      <input matInput id="name" type="text" formControlName="name">
+      <input matInput id="name" type="text" formControlName="name" required>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="name?.touched && name?.invalid">
@@ -17,9 +17,9 @@
       </mat-error>
     </div>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Cuisine</mat-label>
-      <input matInput id="cuisine" type="text" formControlName="cuisine">
+      <input matInput id="cuisine" type="text" formControlName="cuisine" required>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="cuisine?.touched && cuisine?.invalid">
@@ -31,9 +31,12 @@
       <button class="form-array-button" mat-raised-button type="button" (click)="addCategory()">
         + Add another category
       </button>
-      <mat-form-field appearance="legacy" *ngFor="let category of categories.controls; let i=index">
+      <mat-form-field appearance="standard" *ngFor="let category of categories.controls; let i=index">
         <mat-label>Category</mat-label>
-        <input matInput id="category-{{i}}" type="text" [formControlName]="i">
+        <input matInput id="category-{{i}}" type="text" [formControlName]="i" required>
+        <button *ngIf="i !== 0" mat-icon-button matSuffix (click)="removeCategory(i)">
+          <mat-icon class="remove-field-icon">delete_outline</mat-icon>
+        </button>
       </mat-form-field>
       <div class="error-message">
         <mat-error *ngIf="categories?.touched && categories?.invalid">
@@ -46,9 +49,12 @@
       <button class="form-array-button" mat-raised-button type="button" (click)="addIngredient()">
         + Add another ingredient
       </button>
-      <mat-form-field appearance="legacy" *ngFor="let ingredient of ingredients.controls; let i=index">
+      <mat-form-field appearance="standard" *ngFor="let ingredient of ingredients.controls; let i=index">
         <mat-label>Ingredient</mat-label>
-        <input matInput id="ingredients" type="text" [formControlName]="i">
+        <input matInput id="ingredient-{{i}}" type="text" [formControlName]="i" required>
+        <button *ngIf="i !== 0" mat-icon-button matSuffix (click)="removeIngredients(i)">
+          <mat-icon class="remove-field-icon">delete_outline</mat-icon>
+        </button>
       </mat-form-field>
       <div class="error-message">
         <mat-error *ngIf="ingredients?.touched && ingredients?.invalid">
@@ -57,9 +63,9 @@
       </div>
     </div>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Quantity</mat-label>
-      <input matInput id="quantity" type="number" formControlName="quantity">
+      <input matInput id="quantity" type="number" formControlName="quantity" required>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="quantity?.touched && quantity?.invalid">
@@ -67,9 +73,9 @@
       </mat-error>
     </div>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Price (in USD)</mat-label>
-      <input matInput id="price" type="number" formControlName="price">
+      <input matInput id="price" type="number" formControlName="price" required>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="price?.touched && price?.invalid">
@@ -77,9 +83,9 @@
       </mat-error>
     </div>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="standard">
       <mat-label>Short description</mat-label>
-      <input matInput id="description" type="text" formControlName="description">
+      <textarea matInput id="description" type="text" formControlName="description" required></textarea>
     </mat-form-field>
     <div class="error-message">
       <mat-error *ngIf="description?.touched && description?.invalid">
