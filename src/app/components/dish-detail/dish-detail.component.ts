@@ -4,6 +4,7 @@ import { Dish } from "../../interfaces/dish";
 import { DishService } from "../../services/dish.service";
 import { DishesInfoService } from "../../services/dishes-info.service";
 import { Location } from "@angular/common";
+import { DishOrderService } from "../../services/dish-order.service";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class DishDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private dishService: DishService,
               public dishesInfoService: DishesInfoService,
+              public dishOrderService: DishOrderService,
               private location: Location
   ) {
   }

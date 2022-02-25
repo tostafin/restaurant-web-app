@@ -1,6 +1,7 @@
 <header class="dishes-header">
   <button class="show-filters-button" type="button" mat-button (click)="drawer.toggle()">
-    <mat-icon>filter_alt</mat-icon>Show filters
+    <mat-icon>filter_alt</mat-icon>
+    Show filters
   </button>
   <span class="flex-spacer"></span>
   <div class="currency-block">
@@ -38,14 +39,43 @@
           <h2 class="dish-name">{{dish.name | uppercase}}</h2>
           <h3 class="dish-cuisine">{{dish.cuisine | uppercase}} CUISINE</h3>
           <p class="dish-description">{{dish.description}}</p>
+
           <hr class="dish-card-hr">
-          <div class="dish-price-and-cart">
+
+          <div class="dish-price-and-order">
             <div class="dish-price-block">
               <p class="dish-price-title">Price:</p>
-              <p class="dish-price-value">{{dishesInfoService.getDishPrice(dish.price)}} {{dishesInfoService.currCurrency}}</p>
+              <p class="dish-price-value">
+                {{dishesInfoService.getDishPrice(dish.price)}} {{dishesInfoService.currCurrency}}
+              </p>
             </div>
+
             <span class="flex-spacer"></span>
-            <mat-icon class="dish-add-to-cart">add_shopping_cart</mat-icon>
+
+            <div class="dish-order">
+              <h2>Order now:</h2>
+              <div class="order-block" *ngIf="dish.id">
+                <button
+                  mat-mini-fab color="warn"
+                  (click)="dishOrderService.removeDishOrder(dish.id, dish.price, dish.name); $event.stopPropagation()"
+                  [disabled]="!dishOrderService.currOrder[dish.id]">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <div class="order-number" *ngIf="dishOrderService.currOrder[dish.id]; else zeroOrders">
+                  {{dishOrderService.currOrder[dish.id].quantity}}
+                </div>
+                <ng-template #zeroOrders>
+                  <div class="order-number">0</div>
+                </ng-template>
+                <button
+                  mat-mini-fab
+                  (click)="dishOrderService.addDishOrder(dish.id, dish.price, dish.name); $event.stopPropagation()"
+                  [disabled]="dishOrderService.currOrder[dish.id] &&
+                  dishOrderService.currOrder[dish.id].quantity === dish.quantity">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

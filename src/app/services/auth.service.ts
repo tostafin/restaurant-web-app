@@ -12,9 +12,7 @@ import User = firebase.User;
 export class AuthService {
   userObs: Observable<Users | null | undefined>;
   user: User | null | undefined;
-  username: string | undefined = "";
-
-  registerMessage: string = "";
+  userDataDB!: Users;
 
   constructor(private auth: AngularFireAuth,
               private afs: AngularFirestore
@@ -32,11 +30,11 @@ export class AuthService {
     auth.authState.subscribe(user => {
       if (user) {
         this.user = user;
-        this.getUsername();
+        this.getUserDataFromDB();
       } else {
         this.user = null;
       }
-    })
+    });
   }
 
   async registerUser(registerForm: { username: string, email: string, password: string, confirmedPassword: string }):
@@ -65,9 +63,9 @@ export class AuthService {
     return this.auth.signOut();
   }
 
-  getUsername(): void {
+  getUserDataFromDB(): void {
     this.afs.doc<Users>(`users/${this.user?.uid}`).valueChanges().subscribe(user => {
-      this.username = user?.username;
+      if (user !== undefined) this.userDataDB = user;
     })
   }
 }

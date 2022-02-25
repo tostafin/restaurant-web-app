@@ -7,7 +7,7 @@ nav {
   display: flex;
   color: white;
   align-items: center;
-  box-shadow: 15px 15px 29px -9px rgba(66, 68, 90, 0.7);
+  box-shadow: 0 6px 21px -1px rgba(66, 68, 90, 1);
 }
 
 .active-link {

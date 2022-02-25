@@ -3,6 +3,7 @@ import { Dish } from "../../interfaces/dish";
 import { DishService } from "../../services/dish.service";
 import { DishesInfoService } from "../../services/dishes-info.service";
 import { Router } from "@angular/router";
+import { DishOrderService } from "../../services/dish-order.service";
 
 @Component({
   selector: 'app-dishes',
@@ -15,6 +16,7 @@ export class DishesComponent implements OnInit {
 
   constructor(private dishService: DishService,
               public dishesInfoService: DishesInfoService,
+              public dishOrderService: DishOrderService,
               private router: Router
   ) {
   }
@@ -22,6 +24,7 @@ export class DishesComponent implements OnInit {
   ngOnInit(): void {
     this.getDishes();
     this.dishesInfoService.getDishesInfo();
+    this.dishOrderService.getCurrOrder();
   }
 
   getDishes(): void {

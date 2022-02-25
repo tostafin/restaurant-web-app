@@ -16,6 +16,8 @@ import { DeleteDishDialogComponent } from './components/edit-dishes/delete-dish-
 import { UpdateDishDialogComponent } from './components/edit-dishes/update-dish-dialog/update-dish-dialog.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { LoginUserComponent } from './components/login-user/login-user.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -36,6 +38,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatTableModule } from "@angular/material/table";
 
 
 
@@ -54,7 +57,9 @@ import { MatDialogModule } from "@angular/material/dialog";
     UpdateDishDialogComponent,
     RegisterUserComponent,
     LoginUserComponent,
-    ConfirmPasswordDirective
+    ConfirmPasswordDirective,
+    PageNotFoundComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +81,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@
   <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
-      <input matInput id="username" type="text" formControlName="username" required>
+      <input matInput id="username" type="text" formControlName="username" required autofocus>
       <mat-error *ngIf="registerForm.hasError('required', 'username')">
         This field is required.
       </mat-error>

@@ -28,17 +28,21 @@ export class DishService {
   }
 
   async addDish(dish: Dish, images: File[]) {
-    const addToAfs = await this.afs.collection<Dish>(this.collectionName).add({...dish});
-    const imagesToUpload: Promise<void>[] = [];
-    for (let i = 0; i < images.length; i++) {
-      const uploadImage = new Promise<void>((resolve, reject) => {
-        this.storage.upload("images/dishes/" + addToAfs.id + "-" + i.toString() + ".jpg", images[i])
-          .then(() => resolve())
-          .catch(() => reject());
-      })
-      imagesToUpload.push(uploadImage);
+    try {
+      const addToAfs = await this.afs.collection<Dish>(this.collectionName).add({...dish});
+      const imagesToUpload: Promise<void>[] = [];
+      for (let i = 0; i < images.length; i++) {
+        const uploadImage = new Promise<void>((resolve, reject) => {
+          this.storage.upload("images/dishes/" + addToAfs.id + "-" + i.toString() + ".jpg", images[i])
+            .then(() => resolve())
+            .catch(() => reject());
+        })
+        imagesToUpload.push(uploadImage);
+      }
+      return Promise.all(imagesToUpload);
+    } catch (e) {
+      return Promise.reject();
     }
-    return Promise.all(imagesToUpload);
   }
 
   updateDish(dish: Dish, dishId: string | undefined) {
@@ -46,14 +50,19 @@ export class DishService {
   }
 
   async deleteDish(dish: Dish, numOfSourceSets: number) {
-    await this.afs.collection<Dish>(this.collectionName).doc(dish.id).delete();
-    const imagesToRemove: Promise<void>[] = [];
-    for (let i = 0; i < dish.numOfImages * numOfSourceSets; i++) {
-      const removeImage = lastValueFrom(this.storage.ref("images/dishes/" + dish.id + "-" + i.toString() + ".jpg")
-        .delete());
-      imagesToRemove.push(removeImage);
+    try {
+      await this.afs.collection<Dish>(this.collectionName).doc(dish.id).delete();
+      const imagesToRemove: Promise<void>[] = [];
+      for (let i = 0; i < dish.numOfImages * numOfSourceSets; i++) {
+        const removeImage = lastValueFrom(this.storage.ref("images/dishes/" + dish.id + "-" + i.toString() + ".jpg")
+          .delete());
+        imagesToRemove.push(removeImage);
+      }
+      return Promise.all(imagesToRemove);
+    } catch (e) {
+      return Promise.reject();
     }
-    return Promise.all(imagesToRemove);
+
   }
 
 }

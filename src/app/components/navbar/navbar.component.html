@@ -2,9 +2,10 @@
   <a routerLinkActive="active-link" routerLink="/homepage">Homepage</a>
   <a routerLinkActive="active-link" routerLink="/dishes">Menu</a>
   <a routerLinkActive="active-link" routerLink="/dishes-manager">Dishes Manager</a>
+  <a routerLinkActive="active-link" routerLink="/cart">Cart</a>
   <span class="flex-spacer"></span>
   <div class="user-auth-block" *ngIf="authService.user; else newUser">
-    <h3 class="username">Hello, {{authService.username}}!</h3>
+    <h3 class="username" *ngIf="authService.userDataDB">Hello, {{authService.userDataDB.username}}!</h3>
     <button (click)="authService.signOutUser()">Log out</button>
   </div>
   <ng-template class="user-auth-block" #newUser>
@@ -31,12 +32,16 @@
       <mat-icon>restaurant_menu</mat-icon>
       <span>Dishes Manager</span>
     </button>
+    <button mat-menu-item routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Cart</span>
+    </button>
     <div *ngIf="authService.user; else newUser">
       <button mat-menu-item>
         <mat-icon>logout</mat-icon>
         <span>Log out</span>
       </button>
-      <span mat-menu-item disabled>Hello, {{authService.username}}!</span>
+      <span mat-menu-item disabled *ngIf="authService.userDataDB">Hello, {{authService.userDataDB.username}}!</span>
     </div>
     <ng-template #newUser>
       <button mat-menu-item routerLink="/login">

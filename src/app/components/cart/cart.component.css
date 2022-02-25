@@ -1,0 +1,27 @@
+.cart-header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em;
+}
+
+.currency-block {
+  text-align: center;
+}
+
+.cart-container {
+  padding: 1em;
+  text-align: center;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  text-align: left;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.order-button {
+  margin-top: 3em;
+}

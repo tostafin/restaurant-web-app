@@ -42,7 +42,31 @@
       <p class="dish-description">{{dish.description}}</p>
     </div>
     <div class="dish-order">
-      <p>Order:</p>
+      <h2 class="dish-price">
+        Price: {{dishesInfoService.getDishPrice(dish.price)}} {{dishesInfoService.currCurrency}}
+      </h2>
+      <h1 class="dish-order-title">Order now:</h1>
+      <div class="order-block" *ngIf="dish.id">
+        <button
+          mat-mini-fab color="warn"
+          (click)="dishOrderService.removeDishOrder(dish.id, dish.price, dish.name)"
+          [disabled]="!dishOrderService.currOrder[dish.id]">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <div class="order-number" *ngIf="dishOrderService.currOrder[dish.id]; else zeroOrders">
+          {{dishOrderService.currOrder[dish.id].quantity}}
+        </div>
+        <ng-template #zeroOrders>
+          <div class="order-number">0</div>
+        </ng-template>
+        <button
+          mat-mini-fab
+          (click)="dishOrderService.addDishOrder(dish.id, dish.price, dish.name)"
+          [disabled]="dishOrderService.currOrder[dish.id] &&
+                  dishOrderService.currOrder[dish.id].quantity === dish.quantity">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </div>
   </main>
 </section>

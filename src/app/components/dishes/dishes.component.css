@@ -103,7 +103,7 @@
   margin: 1em 0;
 }
 
-.dish-price-and-cart {
+.dish-price-and-order {
   display: flex;
   align-items: center;
   margin: 2em 0;
@@ -118,6 +118,21 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 0;
+}
+
+.dish-order {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.order-block {
+  display: flex;
+  align-items: center;
+}
+
+.order-number {
+  margin: 0 0.5em;
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1024px) {
