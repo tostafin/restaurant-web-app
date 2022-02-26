@@ -3,6 +3,9 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { lastValueFrom, map, Observable } from "rxjs";
 import { Dish } from "../interfaces/dish";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
+import { DishReview } from "../interfaces/dish-review";
+import firebase from "firebase/compat/app";
+import firestore = firebase.firestore;
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +66,18 @@ export class DishService {
       return Promise.reject();
     }
 
+  }
+
+  addDishReview(dishReview: DishReview): Promise<void[]> {
+    const reviewsToAdd: Promise<void>[] = [
+      this.afs.doc(`users/${dishReview.userId}`).update(
+      {reviews: firestore.FieldValue.arrayUnion(dishReview)}
+      ),
+      this.afs.doc(`dishes/${dishReview.dishId}`).update(
+        {reviews: firestore.FieldValue.arrayUnion(dishReview)}
+      )
+    ];
+    return Promise.all(reviewsToAdd);
   }
 
 }

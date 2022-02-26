@@ -24,8 +24,8 @@
       <img src="{{dishesInfoService.getImageUrl(dish.id, dishImageIdx)}}" alt="{{dish.name}}">
     </picture>
     <figcaption class="arrows-container">
-      <mat-icon (click)="changeImage('left')" class="image-arrow">navigate_before</mat-icon>
-      <mat-icon (click)="changeImage('right')" class="image-arrow">navigate_next</mat-icon>
+      <mat-icon (click)="changeImage('left')" class="change-arrow">navigate_before</mat-icon>
+      <mat-icon (click)="changeImage('right')" class="change-arrow">navigate_next</mat-icon>
     </figcaption>
   </figure>
   <main class="dish-block">
@@ -69,4 +69,104 @@
       </div>
     </div>
   </main>
+</section>
+<section class="reviews-container" *ngIf="dish">
+  <div class="add-review-container">
+    <h1 class="add-review-title">Add your review:</h1>
+    <div class="add-review" *ngIf="!isAlreadyReviewed(); else alreadyReviewed">
+      <form [formGroup]="addReviewForm" class="add-review-form" (ngSubmit)="addReviewSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Date of purchase</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfPurchase">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Review</mat-label>
+          <textarea matInput formControlName="review"></textarea>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+        <div class="dish-rating">
+          <h2 class="dish-rating-title">Dish rating:</h2>
+          <mat-icon [ngClass]="{'checked': rating !== null && rating.value >= 1}"
+                    (click)="updateRating(1)">star_rate
+          </mat-icon>
+          <mat-icon [ngClass]="{'checked': rating !== null && rating.value >= 2}"
+                    (click)="updateRating(2)">star_rate
+          </mat-icon>
+          <mat-icon [ngClass]="{'checked': rating !== null && rating.value >= 3}"
+                    (click)="updateRating(3)">star_rate
+          </mat-icon>
+          <mat-icon [ngClass]="{'checked': rating !== null && rating.value >= 4}"
+                    (click)="updateRating(4)">star_rate
+          </mat-icon>
+          <mat-icon [ngClass]="{'checked': rating !== null && rating.value >= 5}"
+                    (click)="updateRating(5)">star_rate
+          </mat-icon>
+        </div>
+
+        <button type="submit"
+                class="add-review-button"
+                mat-raised-button
+                color="accent"
+                [disabled]="!authService.user">Add review
+        </button>
+      </form>
+    </div>
+    <ng-template #alreadyReviewed>
+      <h1>You have already reviewed this dish.</h1>
+    </ng-template>
+  </div>
+  <div class="customers-reviews-container">
+    <h1 class="review-title">Reviews ({{dish.reviews.length}}):</h1>
+    <h2 *ngIf="!dish.reviews.length">No reviews yet. Be the first one to write it!</h2>
+    <div *ngIf="dish.reviews.length" class="review-content-container">
+      <h1 class="review-title">{{dish.reviews[currReviewIdx]["title"] | uppercase}}</h1>
+      <mat-icon class="quote">format_quote</mat-icon>
+      <div class="review-description">
+        {{dish.reviews[currReviewIdx]["review"]}}
+      </div>
+      <div class="review-rating">
+        <mat-icon [ngClass]="{'checked': rating !== null && dish.reviews[currReviewIdx]['rating'] >= 1}">
+          star_rate
+        </mat-icon>
+        <mat-icon [ngClass]="{'checked': rating !== null && dish.reviews[currReviewIdx]['rating'] >= 2}">
+          star_rate
+        </mat-icon>
+        <mat-icon [ngClass]="{'checked': rating !== null && dish.reviews[currReviewIdx]['rating'] >= 3}">
+          star_rate
+        </mat-icon>
+        <mat-icon [ngClass]="{'checked': rating !== null && dish.reviews[currReviewIdx]['rating'] >= 4}">
+          star_rate
+        </mat-icon>
+        <mat-icon [ngClass]="{'checked': rating !== null && dish.reviews[currReviewIdx]['rating'] >= 5}">
+          star_rate
+        </mat-icon>
+      </div>
+      <div class="review-username">
+        ~ {{dish.reviews[currReviewIdx]["username"]}}
+      </div>
+      <div class="review-date">
+        Date of purchase: {{dish.reviews[currReviewIdx]["dateOfPurchase"].toDate() | date:'MMMM dd yyyy'}}
+      </div>
+      <div class="arrows-container">
+        <mat-icon (click)="changeReview('left')" class="change-arrow">navigate_before</mat-icon>
+        <mat-icon (click)="changeReview('right')" class="change-arrow">navigate_next</mat-icon>
+      </div>
+      <button mat-stroked-button
+              color="accent"
+              (click)="changeReview('random')"
+              [disabled]="dish.reviews.length <= 1">Random review
+      </button>
+    </div>
+  </div>
 </section>

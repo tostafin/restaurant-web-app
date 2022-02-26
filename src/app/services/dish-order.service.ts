@@ -64,13 +64,11 @@ export class DishOrderService {
 
     await this.afs.doc(`users/${this.authService.user?.uid}`).update(
       {prevOrders: firestore.FieldValue.arrayUnion(currOrder)}
-    ).then(r => console.log("1" + r))
-      .catch(e => console.log("1" + e))
+    )
 
     await this.afs.doc(`users/${this.authService.user?.uid}`).update(
       {numOfOrders: firestore.FieldValue.increment(1)}
-    ).then(r => console.log("2" + r))
-      .catch(e => console.log("2" + e))
+    )
 
     return this.afs.doc(`users/${this.authService.user?.uid}`).update(
       {currOrder: {}}

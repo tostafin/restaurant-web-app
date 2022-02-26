@@ -42,7 +42,7 @@
   text-align: center;
 }
 
-.image-arrow {
+.change-arrow {
   cursor: pointer;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .dish-info {
-  flex-basis: 70%;
+  flex-basis: 50%;
 }
 
 .dish-categories {
@@ -101,7 +101,7 @@
 }
 
 .dish-order {
-  flex-basis: 30%;
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,6 +124,115 @@
 .order-number {
   margin: 0 0.5em;
   font-size: 1.5rem;
+}
+
+.reviews-container {
+  margin: 2em 1em 4em 1em;
+  display: flex;
+}
+
+.add-review-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  border-right: 1px solid #212121;
+  padding-right: 1em;
+}
+
+.add-review-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.add-review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-review-form .mat-form-field {
+  width: 100%;
+}
+
+.customers-reviews {
+  flex-basis: 50%;
+}
+
+.dish-rating {
+  display: flex;
+  align-items: center;
+}
+
+.dish-rating-title {
+  margin: 0;
+  padding-right: 0.5em;
+}
+
+.dish-rating .mat-icon {
+  cursor: pointer;
+}
+
+.checked {
+  color: orange;
+}
+
+.add-review-button {
+  margin: 1em auto;
+}
+
+.customers-reviews-container {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #212121;
+  padding-left: 1em;
+}
+
+.review-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.review-content-container {
+  text-align: center;
+  background-color: #595959;
+  padding: 3em;
+  width: 50%;
+  border-radius: 4px;
+  word-wrap: break-word;
+  display: inline-block;
+  word-break: break-word;
+}
+
+.review-title {
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+
+.quote {
+  transform: scale(2);
+  margin-bottom: 1em;
+}
+
+.review-description {
+  font-style: italic;
+  font-size: 1.3rem;
+  margin-bottom: 0.5em;
+}
+
+.review-username {
+  margin-bottom: 1em;
+  font-size: 1.2rem;
+}
+
+.review-date {
+  font-size: 1.1rem;
+  margin-bottom: 1em;
+}
+
+.arrows-container {
+  margin-bottom: 1em;
 }
 
 @media screen and (max-width: 1400px) {

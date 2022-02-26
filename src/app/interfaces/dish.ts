@@ -1,3 +1,5 @@
+import { DishReview } from "./dish-review";
+
 export interface Dish {
   id?: string;
   name: string;
@@ -8,4 +10,5 @@ export interface Dish {
   quantity: number;
   description: string;
   numOfImages: number;
+  reviews: DishReview[];
 }
