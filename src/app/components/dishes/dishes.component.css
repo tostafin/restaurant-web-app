@@ -135,6 +135,11 @@
   font-size: 1.5rem;
 }
 
+.order-not-logged-in {
+  width: 40%;
+  font-size: 1.2rem;
+}
+
 @media screen and (max-width: 1024px) {
   .dish-card {
     flex-basis: 45%;

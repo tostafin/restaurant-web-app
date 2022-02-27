@@ -52,7 +52,7 @@
 
             <span class="flex-spacer"></span>
 
-            <div class="dish-order">
+            <div class="dish-order" *ngIf="authService.user; else notLoggedIn">
               <h2>Order now:</h2>
               <div class="order-block" *ngIf="dish.id">
                 <button
@@ -76,6 +76,11 @@
                 </button>
               </div>
             </div>
+            <ng-template #notLoggedIn>
+              <div class="order-not-logged-in">
+                You need to be logged in to place an order.
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

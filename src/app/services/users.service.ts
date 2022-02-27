@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Users } from "../interfaces/users";
 import { Roles } from "../interfaces/roles";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class UsersService {
   usersRoles: { [key: string]: Roles } = {};
   usersRolesArr: { [key: string]: string[] } = {};
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore,
+              private authService: AuthService) { }
 
   setRole(uid: string, role: string): Promise<void> {
     const userRole: Roles = this.usersRoles[uid];

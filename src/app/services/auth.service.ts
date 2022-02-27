@@ -6,6 +6,7 @@ import { Users } from "../interfaces/users";
 import firebase from "firebase/compat";
 import User = firebase.User;
 import { SettingsService } from "./settings.service";
+import { Roles } from "../interfaces/roles";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,12 @@ export class AuthService {
   userObs$: Observable<Users | null | undefined>;
   user: User | null | undefined;
   userDataDB!: Users;
+  userRoles: Roles = {
+    admin: false,
+    manager: false,
+    customer: false
+  };
+  username: string = "";
 
   constructor(private auth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -35,6 +42,12 @@ export class AuthService {
         this.getUserDataFromDB();
       } else {
         this.user = null;
+        this.userRoles = {
+          admin: false,
+          manager: false,
+          customer: false
+        };
+        this.username = "";
       }
 
       this.setPersistence();
@@ -78,7 +91,11 @@ export class AuthService {
 
   getUserDataFromDB(): void {
     this.afs.doc<Users>(`users/${this.user?.uid}`).valueChanges().subscribe(user => {
-      if (user !== undefined) this.userDataDB = user;
+      if (user !== undefined) {
+        this.userDataDB = user;
+        this.userRoles = user.roles;
+        this.username = user.username;
+      }
     })
   }
 
@@ -86,5 +103,13 @@ export class AuthService {
     this.settingsService.persistence$.subscribe(persistence => {
       if (persistence !== undefined) this.auth.setPersistence(persistence.persistence);
     })
+  }
+
+  hasRole(allowedRoles: string[]): boolean {
+    if (!this.user) return false;
+    for (let role of allowedRoles) {
+      if (this.userRoles[role as keyof Roles]) return true;
+    }
+    return false;
   }
 }

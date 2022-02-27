@@ -7,7 +7,7 @@ export interface Users {
   username: string;
   numOfOrders: number;
   currOrder: { [key: string]: DishOrder };
-  prevOrders: { [key: number]: { [key: string]: DishOrder } };
+  prevOrders: { [key: string]: DishOrder }[];
   reviews: DishReview[];
   roles: Roles;
   banned: boolean;

@@ -10,6 +10,7 @@ import { AuthService } from "../../services/auth.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import firebase from "firebase/compat/app";
 import Timestamp = firebase.firestore.Timestamp;
+import { SettingsService } from "../../services/settings.service";
 
 
 @Component({
@@ -40,7 +41,8 @@ export class DishDetailComponent implements OnInit {
               public dishOrderService: DishOrderService,
               private location: Location,
               public authService: AuthService,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private settingsService: SettingsService
   ) {
   }
 
@@ -79,22 +81,23 @@ export class DishDetailComponent implements OnInit {
   }
 
   isAlreadyReviewed(): boolean {
-    if (this.dish !== undefined && this.dish.id !== undefined && this.authService.userDataDB !== undefined) {
+    if (this.dish && this.dish.id && this.authService.userDataDB) {
       return this.authService.userDataDB.reviews.map(r => r.dishId).includes(this.dish.id);
     }
     return true;
   }
 
-  updateRating(numOfStars: number): void {
-    this.rating?.setValue(numOfStars);
+  wasOrderedByCustomer(): boolean {
+    if (this.dish && this.dish.id && this.authService.userDataDB) {
+      for (let order of this.authService.userDataDB.prevOrders) {
+        if (Object.keys(order).includes(this.dish.id)) return true;
+      }
+    }
+    return false;
   }
 
-  reviewMessage(message: string): void {
-    this.snackBar.open(message, "Close", {
-      duration: 5000,
-      horizontalPosition: "center",
-      verticalPosition: "top"
-    })
+  updateRating(numOfStars: number): void {
+    this.rating?.setValue(numOfStars);
   }
 
   addReviewSubmit(): void {
@@ -105,8 +108,8 @@ export class DishDetailComponent implements OnInit {
     const dateOfPurchase: Date = this.dateOfPurchase?.value;
     this.dateOfPurchase?.setValue(Timestamp.fromDate(dateOfPurchase));
     this.dishService.addDishReview(this.addReviewForm.value)
-      .then(() => this.reviewMessage("Your review was added!"))
-      .catch(e => this.reviewMessage("An error occurred while adding your review: " + e));
+      .then(() => this.settingsService.openGlobalSnackbarMessage("Your review was added!"))
+      .catch(e => this.settingsService.openGlobalSnackbarMessage("An error occurred while adding your review: " + e));
   }
 
   changeReview(option: string): void {

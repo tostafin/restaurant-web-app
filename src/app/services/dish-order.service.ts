@@ -12,6 +12,7 @@ import firestore = firebase.firestore;
 })
 export class DishOrderService {
   currOrder: { [key: string]: DishOrder } = {};
+  totalQuantity: number = 0;
 
   constructor(private afs: AngularFirestore,
               private authService: AuthService,
@@ -37,9 +38,11 @@ export class DishOrderService {
       this.currOrder[dishId] = {
         quantity: 1,
         unitPrice: dishPrice,
-        dishName: dishName
+        dishName: dishName,
+        orderNum: this.authService.userDataDB.numOfOrders
       };
     } else this.currOrder[dishId].quantity++;
+    this.totalQuantity++;
     this.afs.doc<Users>(`users/${this.authService.user?.uid}`).update(
       {currOrder: this.currOrder}
     )
@@ -58,12 +61,14 @@ export class DishOrderService {
   }
 
   async orderDishes(): Promise<void> {
-    const orderNum: number = this.authService.userDataDB.numOfOrders;
-    const currOrder: { [key: number]: { [key: string]: DishOrder } } = {};
-    currOrder[orderNum] = this.currOrder;
+    for (let order of Object.entries(this.currOrder)) {
+      await this.afs.doc(`dishes/${order[0]}`).update(
+        {quantity: firestore.FieldValue.increment(-order[1]["quantity"])}
+      )
+    }
 
     await this.afs.doc(`users/${this.authService.user?.uid}`).update(
-      {prevOrders: firestore.FieldValue.arrayUnion(currOrder)}
+      {prevOrders: firestore.FieldValue.arrayUnion(this.currOrder)}
     )
 
     await this.afs.doc(`users/${this.authService.user?.uid}`).update(

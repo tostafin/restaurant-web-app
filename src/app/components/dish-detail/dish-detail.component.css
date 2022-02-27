@@ -190,7 +190,6 @@
 }
 
 .review-title {
-  font-size: 2rem;
   font-weight: 700;
 }
 
@@ -300,5 +299,30 @@
 
   .dish-ingredients-list li {
     font-size: 1.5rem;
+  }
+
+  .reviews-container {
+    flex-direction: column;
+  }
+
+  .add-review-container {
+    border-right: 0;
+    margin: 5em 0;
+    text-align: center;
+  }
+
+  .customers-reviews-container {
+    border-left: 0;
+  }
+
+  .review-content-container {
+    text-align: center;
+    background-color: #595959;
+    padding: 3em;
+    width: 85%;
+    border-radius: 4px;
+    word-wrap: break-word;
+    display: inline-block;
+    word-break: break-word;
   }
 }

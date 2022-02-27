@@ -1,12 +1,22 @@
 <nav class="primary-navbar">
   <a routerLinkActive="active-link" routerLink="/homepage">Homepage</a>
   <a routerLinkActive="active-link" routerLink="/dishes">Menu</a>
-  <a routerLinkActive="active-link" routerLink="/dishes-manager">Dishes Manager</a>
-  <a routerLinkActive="active-link" routerLink="/admin-panel">Admin Panel</a>
-  <a routerLinkActive="active-link" routerLink="/cart">Cart</a>
+  <a routerLinkActive="active-link"
+     routerLink="/dishes-manager"
+     *ngIf="authService.hasRole(['admin', 'manager'])">Dishes Manager
+  </a>
+  <a routerLinkActive="active-link"
+     routerLink="/admin-panel"
+     *ngIf="authService.hasRole(['admin'])">
+    Admin Panel
+  </a>
+  <a routerLinkActive="active-link"
+     routerLink="/cart"
+     *ngIf="authService.hasRole(['admin', 'manager', 'customer'])">Cart
+  </a>
   <span class="flex-spacer"></span>
   <div class="user-auth-block" *ngIf="authService.user; else newUser">
-    <h3 class="username" *ngIf="authService.userDataDB">Hello, {{authService.userDataDB.username}}!</h3>
+    <h3 class="username" *ngIf="authService.username !== ''">Hello, {{authService.username}}!</h3>
     <button (click)="authService.signOutUser()">Log out</button>
   </div>
   <ng-template class="user-auth-block" #newUser>
@@ -29,15 +39,21 @@
       <mat-icon>menu_book</mat-icon>
       <span>Menu</span>
     </button>
-    <button mat-menu-item routerLink="/dishes-manager">
+    <button mat-menu-item
+            routerLink="/dishes-manager"
+            *ngIf="authService.hasRole(['admin', 'manager'])">
       <mat-icon>restaurant_menu</mat-icon>
       <span>Dishes Manager</span>
     </button>
-    <button mat-menu-item routerLink="/admin-panel">
+    <button mat-menu-item
+            routerLink="/admin-panel"
+            *ngIf="authService.hasRole(['admin'])">
       <mat-icon>admin_panel_settings</mat-icon>
       <span>Admin Panel</span>
     </button>
-    <button mat-menu-item routerLink="/cart">
+    <button mat-menu-item
+            routerLink="/cart"
+            *ngIf="authService.hasRole(['admin', 'manager', 'customer'])">
       <mat-icon>shopping_cart</mat-icon>
       <span>Cart</span>
     </button>
@@ -46,7 +62,7 @@
         <mat-icon>logout</mat-icon>
         <span>Log out</span>
       </button>
-      <span mat-menu-item disabled *ngIf="authService.userDataDB">Hello, {{authService.userDataDB.username}}!</span>
+      <span mat-menu-item disabled *ngIf="authService.username !== ''">Hello, {{authService.username}}!</span>
     </div>
     <div *ngIf="!authService.user">
       <button mat-menu-item routerLink="/login">

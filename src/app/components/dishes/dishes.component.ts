@@ -4,6 +4,7 @@ import { DishService } from "../../services/dish.service";
 import { DishesInfoService } from "../../services/dishes-info.service";
 import { Router } from "@angular/router";
 import { DishOrderService } from "../../services/dish-order.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-dishes',
@@ -17,6 +18,7 @@ export class DishesComponent implements OnInit {
   constructor(private dishService: DishService,
               public dishesInfoService: DishesInfoService,
               public dishOrderService: DishOrderService,
+              public authService: AuthService,
               private router: Router
   ) {
   }
