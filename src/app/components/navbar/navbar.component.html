@@ -2,6 +2,7 @@
   <a routerLinkActive="active-link" routerLink="/homepage">Homepage</a>
   <a routerLinkActive="active-link" routerLink="/dishes">Menu</a>
   <a routerLinkActive="active-link" routerLink="/dishes-manager">Dishes Manager</a>
+  <a routerLinkActive="active-link" routerLink="/admin-panel">Admin Panel</a>
   <a routerLinkActive="active-link" routerLink="/cart">Cart</a>
   <span class="flex-spacer"></span>
   <div class="user-auth-block" *ngIf="authService.user; else newUser">
@@ -32,18 +33,22 @@
       <mat-icon>restaurant_menu</mat-icon>
       <span>Dishes Manager</span>
     </button>
+    <button mat-menu-item routerLink="/admin-panel">
+      <mat-icon>admin_panel_settings</mat-icon>
+      <span>Admin Panel</span>
+    </button>
     <button mat-menu-item routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
       <span>Cart</span>
     </button>
-    <div *ngIf="authService.user; else newUser">
-      <button mat-menu-item>
+    <div *ngIf="authService.user">
+      <button mat-menu-item (click)="authService.signOutUser()">
         <mat-icon>logout</mat-icon>
         <span>Log out</span>
       </button>
       <span mat-menu-item disabled *ngIf="authService.userDataDB">Hello, {{authService.userDataDB.username}}!</span>
     </div>
-    <ng-template #newUser>
+    <div *ngIf="!authService.user">
       <button mat-menu-item routerLink="/login">
         <mat-icon>login</mat-icon>
         <span>Login</span>
@@ -52,7 +57,7 @@
         <mat-icon>person_add</mat-icon>
         <span>Register</span>
       </button>
-    </ng-template>
+    </div>
 
   </mat-menu>
 </nav>

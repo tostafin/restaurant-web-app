@@ -27,7 +27,8 @@ export class UpdateDishDialogComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^(([A-ZÀ-Ž0-9])|([A-ZÀ-Ž0-9][a-zà-ž0-9]+))+((?:\s[A-ZÀ-Ža-zà-ž0-9]+)+)[.!]$/)
     ]),
-    numOfImages: [this.data.dish.numOfImages]
+    numOfImages: [this.data.dish.numOfImages],
+    reviews: [this.data.dish.reviews]
   })
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { dish: Dish },

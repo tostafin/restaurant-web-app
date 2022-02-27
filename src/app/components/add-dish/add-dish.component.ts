@@ -30,7 +30,8 @@ export class AddDishComponent implements OnInit {
       Validators.pattern(/^(([A-ZÀ-Ž0-9])|([A-ZÀ-Ž0-9][a-zà-ž0-9]+))+((?:\s[A-ZÀ-Ža-zà-ž0-9]+)+)[.!]$/)
     ]),
     images: this.fb.array([]),
-    numOfImages: ['']
+    numOfImages: [''],
+    reviews: [[]]
   })
 
   imagesNumArr: number[] = [];

@@ -18,6 +18,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import { LoginUserComponent } from './components/login-user/login-user.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CartComponent } from './components/cart/cart.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -41,8 +42,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatTableModule } from "@angular/material/table";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
-
-
+import { MatTabsModule } from "@angular/material/tabs";
+import { BanUserDialogComponent } from './components/admin-panel/ban-user-dialog/ban-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,9 @@ import { MatNativeDateModule } from "@angular/material/core";
     LoginUserComponent,
     ConfirmPasswordDirective,
     PageNotFoundComponent,
-    CartComponent
+    CartComponent,
+    AdminPanelComponent,
+    BanUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ import { MatNativeDateModule } from "@angular/material/core";
     MatDialogModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

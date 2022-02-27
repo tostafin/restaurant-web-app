@@ -1,0 +1,46 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Roles">
+    <section>
+      <h1 class="title">Change roles:</h1>
+      <div class="users" *ngFor="let user of roleService.users">
+        <h3>{{user.username}}:</h3>
+        <mat-button-toggle-group
+          multiple
+          [value]="roleService.usersRolesArr[user.uid]">
+          <mat-button-toggle
+            *ngFor="let role of roles"
+            [value]="role"
+            (change)="changeUserRole(user.uid, role)">
+            {{role}}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+  </mat-tab>
+  <mat-tab label="Session persistence">
+    <section>
+      <h1 class="title">Change global session persistence:</h1>
+      <mat-button-toggle-group [(ngModel)]="settingsService.currPersistence">
+        <mat-button-toggle value="local" (change)="setPersistence('local')">LOCAL</mat-button-toggle>
+        <mat-button-toggle value="session" (change)="setPersistence('session')">SESSION</mat-button-toggle>
+        <mat-button-toggle value="none" (change)="setPersistence('none')">NONE</mat-button-toggle>
+      </mat-button-toggle-group>
+    </section>
+  </mat-tab>
+  <mat-tab label="Ban users">
+    <h1 class="title">Ban users:</h1>
+    <div class="users" *ngFor="let user of roleService.users">
+      <h3>{{user.username}}:</h3>
+      <button mat-raised-button
+              color="warn"
+              *ngIf="!user.banned; else unbanButton"
+              (click)="openBanDialog(user.uid, false)">Ban
+      </button>
+      <ng-template #unbanButton>
+        <button mat-raised-button
+                color="accent" (click)="unbanUser(user.uid, true)">Unban
+        </button>
+      </ng-template>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -34,7 +34,6 @@ export class DishDetailComponent implements OnInit {
     rating: new FormControl(0)
   })
 
-
   constructor(private route: ActivatedRoute,
               private dishService: DishService,
               public dishesInfoService: DishesInfoService,

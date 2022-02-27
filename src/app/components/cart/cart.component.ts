@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
   }
 
   getOrdersArr(): void {
-    this.authService.userObs.subscribe(user => {
+    this.authService.userObs$.subscribe(user => {
       if (user?.currOrder !== undefined) this.ordersArr = Object.entries(user.currOrder);
     });
   }

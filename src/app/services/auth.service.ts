@@ -5,19 +5,21 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { Users } from "../interfaces/users";
 import firebase from "firebase/compat";
 import User = firebase.User;
+import { SettingsService } from "./settings.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userObs: Observable<Users | null | undefined>;
+  userObs$: Observable<Users | null | undefined>;
   user: User | null | undefined;
   userDataDB!: Users;
 
   constructor(private auth: AngularFireAuth,
-              private afs: AngularFirestore
+              private afs: AngularFirestore,
+              private settingsService: SettingsService
   ) {
-    this.userObs = auth.authState.pipe(
+    this.userObs$ = auth.authState.pipe(
       switchMap(user => {
         if (user) {
           return afs.doc<Users>(`users/${user?.uid}`).valueChanges();
@@ -34,6 +36,8 @@ export class AuthService {
       } else {
         this.user = null;
       }
+
+      this.setPersistence();
     });
   }
 
@@ -41,15 +45,24 @@ export class AuthService {
     Promise<void> {
     try {
       const newUser = await this.auth.createUserWithEmailAndPassword(registerForm.email, registerForm.password);
-      const newUserData: Users = {
-        username: registerForm.username,
-        numOfOrders: 0,
-        currOrder: {},
-        prevOrders: [],
-        reviews: []
+      if (newUser.user?.uid !== undefined) {
+        const newUserData: Users = {
+          uid: newUser.user.uid,
+          username: registerForm.username,
+          numOfOrders: 0,
+          currOrder: {},
+          prevOrders: [],
+          reviews: [],
+          roles: {
+            admin: false,
+            manager: false,
+            customer: true
+          },
+          banned: false
+        }
+        await this.afs.doc<Users>(`users/${newUser.user?.uid}`).set(newUserData);
+        return Promise.resolve();
       }
-      await this.afs.doc<Users>(`users/${newUser.user?.uid}`).set(newUserData);
-      return Promise.resolve();
     } catch (e) {
       return Promise.reject(e);
     }
@@ -66,6 +79,12 @@ export class AuthService {
   getUserDataFromDB(): void {
     this.afs.doc<Users>(`users/${this.user?.uid}`).valueChanges().subscribe(user => {
       if (user !== undefined) this.userDataDB = user;
+    })
+  }
+
+  setPersistence(): void {
+    this.settingsService.persistence$.subscribe(persistence => {
+      if (persistence !== undefined) this.auth.setPersistence(persistence.persistence);
     })
   }
 }

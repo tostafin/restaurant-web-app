@@ -27,7 +27,7 @@ export class DishOrderService {
   }
 
   getCurrOrder(): void {
-    this.authService.userObs.subscribe(user => {
+    this.authService.userObs$.subscribe(user => {
       if (user?.currOrder !== undefined) this.currOrder = user?.currOrder;
     });
   }
