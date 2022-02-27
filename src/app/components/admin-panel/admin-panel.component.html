@@ -2,11 +2,11 @@
   <mat-tab label="Roles">
     <section>
       <h1 class="title">Change roles:</h1>
-      <div class="users" *ngFor="let user of roleService.users">
+      <div class="users" *ngFor="let user of usersService.users">
         <h3>{{user.username}}:</h3>
         <mat-button-toggle-group
           multiple
-          [value]="roleService.usersRolesArr[user.uid]">
+          [value]="usersService.usersRolesArr[user.uid]">
           <mat-button-toggle
             *ngFor="let role of roles"
             [value]="role"
@@ -29,7 +29,7 @@
   </mat-tab>
   <mat-tab label="Ban users">
     <h1 class="title">Ban users:</h1>
-    <div class="users" *ngFor="let user of roleService.users">
+    <div class="users" *ngFor="let user of usersService.users">
       <h3>{{user.username}}:</h3>
       <button mat-raised-button
               color="warn"

@@ -6,7 +6,7 @@ import { Roles } from "../interfaces/roles";
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
+export class UsersService {
   users: Users[] = [];
   usersRoles: { [key: string]: Roles } = {};
   usersRolesArr: { [key: string]: string[] } = {};
