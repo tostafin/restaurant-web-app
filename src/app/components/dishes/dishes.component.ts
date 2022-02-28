@@ -48,6 +48,8 @@ export class DishesComponent implements OnInit {
 
   getFilteredDishes(filteredDishes: Dish[]) {
     this.filteredDishes = filteredDishes;
+    this.dishesNumArr = Array(this.filteredDishes.length).fill(1).map((x, i) => i + 1);
+    this.changeNumOfDishes(this.filteredDishes.length);
   }
 
   goToDishDetails(dishName: string, dishId: string | undefined) {
@@ -56,8 +58,12 @@ export class DishesComponent implements OnInit {
       .catch(e => console.error(e));
   }
 
-  changePageNum(dishesNum: MatSelectChange) {
-    this.numOfDishes = dishesNum.value;
+  changeNumOfDishes(dishesNum: MatSelectChange | number) {
+    if (dishesNum instanceof MatSelectChange) {
+      this.numOfDishes = dishesNum.value;
+    } else {
+      this.numOfDishes = dishesNum;
+    }
     this.updatePagination();
   }
 
@@ -73,11 +79,9 @@ export class DishesComponent implements OnInit {
 
   updatePagination() {
     const numOfPages = Math.ceil(this.filteredDishes.length / this.numOfDishes);
-    if (!isNaN(this.currPage)) this.currPage = Math.min(this.currPage, numOfPages);
-    else this.currPage = numOfPages;
+    this.currPage = Math.min(this.currPage, numOfPages);
     this.filteredDishesComponent = this.paginate(this.filteredDishes);
     if (this.numOfDishes !== 0) this.pages = Array(numOfPages).fill(1).map((x, i) => i + 1);
     else this.pages = [];
   }
-
 }

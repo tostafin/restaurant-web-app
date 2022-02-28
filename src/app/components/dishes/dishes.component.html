@@ -23,23 +23,22 @@
     <div class="pagination">
       <mat-form-field color="accent" class="pagination-dishes-per-page">
         <mat-label>Dishes per page</mat-label>
-        <mat-select (selectionChange)="changePageNum($event)">
+        <mat-select (selectionChange)="changeNumOfDishes($event)" [(ngModel)]="numOfDishes">
           <mat-option
             *ngFor="let num of dishesNumArr"
             [value]="num"
-          >{{num}}
+            [disabled]="numOfDishes === num">{{num}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field color="accent" class="pagination-page-num">
         <mat-label>Page</mat-label>
-        <mat-select (selectionChange)="changeCurrPage($event)">
+        <mat-select (selectionChange)="changeCurrPage($event)" [(ngModel)]="currPage">
           <mat-option
             *ngFor="let num of pages"
             [value]="num"
-            [disabled]="currPage === num"
-          >{{num}}
+            [disabled]="currPage === num">{{num}}
           </mat-option>
         </mat-select>
       </mat-form-field>
