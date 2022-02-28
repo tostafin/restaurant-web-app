@@ -20,9 +20,34 @@
     <app-filters [dishes]="dishes" (filteredDishesEvent)="getFilteredDishes($event)"></app-filters>
   </mat-drawer>
   <section class="dishes-container">
+    <div class="pagination">
+      <mat-form-field color="accent" class="pagination-dishes-per-page">
+        <mat-label>Dishes per page</mat-label>
+        <mat-select (selectionChange)="changePageNum($event)">
+          <mat-option
+            *ngFor="let num of dishesNumArr"
+            [value]="num"
+          >{{num}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field color="accent" class="pagination-page-num">
+        <mat-label>Page</mat-label>
+        <mat-select (selectionChange)="changeCurrPage($event)">
+          <mat-option
+            *ngFor="let num of pages"
+            [value]="num"
+            [disabled]="currPage === num"
+          >{{num}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
     <main class="dishes-cards" *ngIf="dishes.length">
       <div class="dish-card"
-           *ngFor="let dish of filteredDishes"
+           *ngFor="let dish of filteredDishesComponent"
            (click)="goToDishDetails(dish.name, dish.id)">
         <figure class="dish-figure">
           <picture class="dish-image">

@@ -28,6 +28,15 @@
   padding: 0 1em;
 }
 
+/* Pagination */
+.pagination-dishes-per-page {
+  margin-right: 0.5em;
+}
+
+.pagination-page-num {
+  margin-left: 0.5em;
+}
+
 /* Dishes cards */
 .dishes-container {
   min-height: 100vh;
@@ -178,6 +187,18 @@
 }
 
 @media screen and (max-width: 768px) {
+  .pagination {
+    text-align: center;
+  }
+
+  .pagination-dishes-per-page {
+    margin: 0 0.5em;
+  }
+
+  .pagination-page-num {
+    margin: 0 0.5em;
+  }
+
   .dishes-cards {
     border: none;
   }
