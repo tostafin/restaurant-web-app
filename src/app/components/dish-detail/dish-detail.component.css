@@ -54,6 +54,7 @@
 
 .dish-info {
   flex-basis: 50%;
+  word-wrap: break-word;
 }
 
 .dish-categories {
@@ -75,6 +76,7 @@
   font-weight: 700;
   padding: 0.5em 0;
   margin-bottom: 0.5em;
+  line-height: 1;
 }
 
 .dish-cuisine {
@@ -307,6 +309,7 @@
 
   .add-review-container {
     border-right: 0;
+    padding-right: 0;
     margin: 5em 0;
     text-align: center;
   }
@@ -315,14 +318,11 @@
     border-left: 0;
   }
 
+  .customers-reviews-container {
+    padding-left: 0;
+  }
+
   .review-content-container {
-    text-align: center;
-    background-color: #595959;
-    padding: 3em;
     width: 85%;
-    border-radius: 4px;
-    word-wrap: break-word;
-    display: inline-block;
-    word-break: break-word;
   }
 }

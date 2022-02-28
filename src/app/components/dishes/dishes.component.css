@@ -5,14 +5,14 @@
   padding: 1em 0;
 }
 
-.currency-block {
-  text-align: center;
-  margin-right: 1em;
-}
-
 .show-filters-button {
   font-size: 1.4rem;
   margin-left: 0.25em;
+}
+
+.currency-block {
+  text-align: center;
+  margin-right: 1em;
 }
 
 .change-currency-title {
@@ -75,6 +75,7 @@
 
 .dish-info {
   padding: 0 0.5em;
+  word-wrap: break-word;
 }
 
 .dish-categories {
@@ -187,6 +188,19 @@
 }
 
 @media screen and (max-width: 768px) {
+  .show-filters-button {
+    font-size: 1.1rem;
+    padding: 0 0.25em;
+  }
+
+  .change-currency-title {
+    font-size: 1.1rem;
+  }
+
+  .currency-value {
+    font-size: 1rem;
+  }
+
   .pagination {
     text-align: center;
   }
