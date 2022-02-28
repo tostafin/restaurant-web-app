@@ -37,6 +37,26 @@
             <li *ngFor="let category of dish.categories">{{category}}</li>
           </ul>
           <h2 class="dish-name">{{dish.name | uppercase}}</h2>
+          <div class="dish-rating"
+               title="Rating: {{dishesInfoService.dishesRating[dish.id]}}"
+               *ngIf="dish.id !== undefined">
+            <mat-icon [ngClass]="{'checked': dishesInfoService.dishesRating[dish.id] >= 1}">
+              star_rate
+            </mat-icon>
+            <mat-icon [ngClass]="{'checked': dishesInfoService.dishesRating[dish.id] >= 2}">
+              star_rate
+            </mat-icon>
+            <mat-icon [ngClass]="{'checked': dishesInfoService.dishesRating[dish.id] >= 3}">
+              star_rate
+            </mat-icon>
+            <mat-icon [ngClass]="{'checked': dishesInfoService.dishesRating[dish.id] >= 4}">
+              star_rate
+            </mat-icon>
+            <mat-icon [ngClass]="{'checked': dishesInfoService.dishesRating[dish.id] >= 5}">
+              star_rate
+            </mat-icon>
+            <span class="dish-rating-cnt">({{dish.reviews.length}})</span>
+          </div>
           <h3 class="dish-cuisine">{{dish.cuisine | uppercase}} CUISINE</h3>
           <p class="dish-description">{{dish.description}}</p>
 

@@ -43,7 +43,6 @@ export class DishesComponent implements OnInit {
   goToDishDetails(dishName: string, dishId: string | undefined) {
     this.router.navigate(["dishes/" + dishName.replace(/\s+/g, '-').toLowerCase(),
       { dishId: dishId }])
-      .then(() => console.log("Add SnackBar later"))
       .catch(e => console.error(e));
   }
 

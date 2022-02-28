@@ -17,6 +17,7 @@ export class FiltersComponent implements OnInit, OnChanges {
 
   filteredCuisines: Set<string> = new Set();
   filteredCategories: Set<string> = new Set();
+  minimumRating: number = 0;
 
   constructor(public dishesInfo: DishesInfoService) {
   }
@@ -64,6 +65,7 @@ export class FiltersComponent implements OnInit, OnChanges {
     filteredDishes = this.filterCuisines(filteredDishes);
     filteredDishes = this.filterCategories(filteredDishes);
     filteredDishes = this.filterPrice(filteredDishes);
+    filteredDishes = this.filterRatings(filteredDishes);
     this.filteredDishesEvent.emit(filteredDishes);
   }
 
@@ -104,6 +106,12 @@ export class FiltersComponent implements OnInit, OnChanges {
     return dishes.filter(dish => this.dishesInfo.filterMinPrice <=
       Math.round(dish.price * this.dishesInfo.exchangeRate) &&
       Math.round(dish.price * this.dishesInfo.exchangeRate) <= this.dishesInfo.filterMaxPrice);
+  }
+
+  filterRatings(dishes: Dish[]): Dish[] {
+    if (!dishes || dishes.length === 0) return [];
+    if (this.minimumRating === 0) return dishes;
+    return dishes.filter(dish => this.dishesInfo.dishesRating[dish.id as string] >= this.minimumRating);
   }
 
 }

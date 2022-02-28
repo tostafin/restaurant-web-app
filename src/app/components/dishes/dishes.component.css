@@ -51,6 +51,11 @@
   border: 1px solid #595959;
   cursor: pointer;
   width: 29vw;
+  transition: all 0.2s ease-in-out;
+}
+
+.dish-card:hover {
+  transform: scale(1.05);
 }
 
 .dish-image source,
@@ -88,7 +93,26 @@
 
 .dish-name {
   font-size: 2rem;
-  padding: 0.5em 0;
+  margin: 0.2em 0;
+}
+
+.dish-rating {
+  display: flex;
+  align-items: center;
+  margin: 0 auto 2em auto;
+  cursor: auto;
+}
+
+.checked {
+  color: orange;
+}
+
+.dish-rating-cnt {
+  font-size: 1.2rem;
+}
+
+.dish-rating .material-icons {
+  line-height: inherit;
 }
 
 .dish-cuisine {
@@ -125,6 +149,7 @@
   flex-direction: column;
   text-align: center;
 }
+
 .order-block {
   display: flex;
   align-items: center;

@@ -124,7 +124,7 @@
                       class="add-review-button"
                       mat-raised-button
                       color="accent"
-                      [disabled]="!authService.user">Add review
+                      [disabled]="!authService.user || addReviewForm.invalid">Add review
               </button>
             </form>
           </div>

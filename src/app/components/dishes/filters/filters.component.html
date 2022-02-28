@@ -13,26 +13,77 @@
   </mat-checkbox>
 
   <h3 class="filter-title">Price:</h3>
-      <div>
-        <label>From: </label>
-        <label>{{dishesInfo.filterMinPrice}}</label>
-      </div>
-      <mat-slider
-        [min]="dishesInfo.getDishPrice(dishesInfo.minPrice)"
-        [max]="dishesInfo.filterMaxPrice"
-        (change)="filterDishes()"
-        [thumbLabel]="true"
-        [(ngModel)]="dishesInfo.filterMinPrice">
-      </mat-slider>
-      <div>
-        <label>To: </label>
-        <label>{{dishesInfo.filterMaxPrice}}</label>
-      </div>
-      <mat-slider
-        [min]="dishesInfo.filterMinPrice"
-        [max]="dishesInfo.getDishPrice(dishesInfo.maxPrice)"
-        (change)="filterDishes()"
-        [thumbLabel]="true"
-        [(ngModel)]="dishesInfo.filterMaxPrice">
-      </mat-slider>
+  <div>
+    <label>From: </label>
+    <label>{{dishesInfo.filterMinPrice}}</label>
+  </div>
+  <mat-slider
+    [min]="dishesInfo.getDishPrice(dishesInfo.minPrice)"
+    [max]="dishesInfo.filterMaxPrice"
+    (change)="filterDishes()"
+    [thumbLabel]="true"
+    [(ngModel)]="dishesInfo.filterMinPrice">
+  </mat-slider>
+  <div>
+    <label>To: </label>
+    <label>{{dishesInfo.filterMaxPrice}}</label>
+  </div>
+  <mat-slider
+    [min]="dishesInfo.filterMinPrice"
+    [max]="dishesInfo.getDishPrice(dishesInfo.maxPrice)"
+    (change)="filterDishes()"
+    [thumbLabel]="true"
+    [(ngModel)]="dishesInfo.filterMaxPrice">
+  </mat-slider>
+
+  <h3 class="filter-title">Minimum rating:</h3>
+  <mat-radio-group class="rating-radio-group" [(ngModel)]="minimumRating" (change)="filterDishes()">
+    <mat-radio-button [value]="0">
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+    </mat-radio-button>
+
+    <mat-radio-button [value]="1">
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+    </mat-radio-button>
+
+    <mat-radio-button [value]="2">
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+    </mat-radio-button>
+
+    <mat-radio-button [value]="3">
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+    </mat-radio-button>
+
+    <mat-radio-button [value]="4">
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon>star_rate</mat-icon>
+    </mat-radio-button>
+
+    <mat-radio-button [value]="5">
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+      <mat-icon class="checked">star_rate</mat-icon>
+    </mat-radio-button>
+  </mat-radio-group>
 </section>

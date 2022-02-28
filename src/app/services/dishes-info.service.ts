@@ -16,6 +16,8 @@ export class DishesInfoService {
   filterMaxPrice: number = -1;
   filterMinPrice: number = Number.MAX_SAFE_INTEGER;
 
+  dishesRating: { [key: string]: number } = {};
+
   readonly numOfSourceSets: number = 2;
 
   constructor(private dishService: DishService) {
@@ -25,6 +27,7 @@ export class DishesInfoService {
     this.dishService.getDishes().subscribe(dishes => {
       this.dishes = dishes;
       this.getMinAndMaxPrice();
+      this.getDishesRatings();
     });
   }
 
@@ -34,8 +37,7 @@ export class DishesInfoService {
       this.exchangeRate = this.dollarToEuro;
       this.filterMinPrice = Math.ceil(this.filterMinPrice * this.exchangeRate);
       this.filterMaxPrice = Math.ceil(this.filterMaxPrice * this.exchangeRate);
-    }
-    else {
+    } else {
       this.currCurrency = "USD";
       this.exchangeRate = 1;
       this.filterMinPrice = this.minPrice;
@@ -83,4 +85,16 @@ export class DishesInfoService {
     this.filterMaxPrice = this.maxPrice;
   }
 
+  getDishesRatings(): void {
+    for (let dish of this.dishes) {
+      let avgRating: number = 0;
+      if (dish.reviews.length > 0) {
+        avgRating = dish.reviews.reduce((a, b) => a + b.rating, 0) / dish.reviews.length;
+      }
+
+      if (dish.id !== undefined) {
+        this.dishesRating[dish.id] = Number((Math.round(avgRating * 100) / 100).toFixed(1));
+      }
+    }
+  }
 }

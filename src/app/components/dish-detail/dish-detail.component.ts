@@ -32,7 +32,10 @@ export class DishDetailComponent implements OnInit {
     dateOfPurchase: new FormControl('', Validators.required),
     title: new FormControl('', Validators.required),
     review: new FormControl('', Validators.required),
-    rating: new FormControl(0)
+    rating: new FormControl(0, [
+      Validators.min(1),
+      Validators.max(5)
+    ])
   })
 
   constructor(private route: ActivatedRoute,
