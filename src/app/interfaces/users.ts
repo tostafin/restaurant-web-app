@@ -3,7 +3,7 @@ import { DishReview } from "./dish-review";
 import { Roles } from "./roles";
 
 export interface Users {
-  uid: string;
+  uid?: string;
   username: string;
   numOfOrders: number;
   currOrder: { [key: string]: DishOrder };

@@ -61,22 +61,26 @@ export class DishOrderService {
   }
 
   async orderDishes(): Promise<void> {
-    for (let order of Object.entries(this.currOrder)) {
-      await this.afs.doc(`dishes/${order[0]}`).update(
-        {quantity: firestore.FieldValue.increment(-order[1]["quantity"])}
-      )
+    try {
+      for (let order of Object.entries(this.currOrder)) {
+        await this.afs.doc(`dishes/${order[0]}`).update(
+          {quantity: firestore.FieldValue.increment(-order[1]["quantity"])}
+        );
+      }
+
+      await this.afs.doc(`users/${this.authService.user?.uid}`).update(
+        {prevOrders: firestore.FieldValue.arrayUnion(this.currOrder)}
+      );
+
+      await this.afs.doc(`users/${this.authService.user?.uid}`).update(
+        {numOfOrders: firestore.FieldValue.increment(1)}
+      );
+
+      return this.afs.doc(`users/${this.authService.user?.uid}`).update(
+        {currOrder: {}}
+      );
+    } catch (e) {
+      return Promise.reject();
     }
-
-    await this.afs.doc(`users/${this.authService.user?.uid}`).update(
-      {prevOrders: firestore.FieldValue.arrayUnion(this.currOrder)}
-    )
-
-    await this.afs.doc(`users/${this.authService.user?.uid}`).update(
-      {numOfOrders: firestore.FieldValue.increment(1)}
-    )
-
-    return this.afs.doc(`users/${this.authService.user?.uid}`).update(
-      {currOrder: {}}
-    )
   }
 }

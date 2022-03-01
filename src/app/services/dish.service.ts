@@ -12,12 +12,12 @@ import firestore = firebase.firestore;
 })
 export class DishService {
   dishes: Observable<Dish[]>;
-  collectionName: string = "dishes";
+  readonly dishCollectionName: string = "dishes";
 
   constructor(private afs: AngularFirestore,
               private storage: AngularFireStorage
   ) {
-    this.dishes = afs.collection<Dish>(this.collectionName).snapshotChanges().pipe(
+    this.dishes = afs.collection<Dish>(this.dishCollectionName).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Dish;
         const id = a.payload.doc.id;
@@ -30,9 +30,9 @@ export class DishService {
     return this.dishes;
   }
 
-  async addDish(dish: Dish, images: File[]) {
+  async addDish(dish: Dish, images: File[]): Promise<void[]> {
     try {
-      const addToAfs = await this.afs.collection<Dish>(this.collectionName).add({...dish});
+      const addToAfs = await this.afs.collection<Dish>(this.dishCollectionName).add({...dish});
       const imagesToUpload: Promise<void>[] = [];
       for (let i = 0; i < images.length; i++) {
         const uploadImage = new Promise<void>((resolve, reject) => {
@@ -48,13 +48,13 @@ export class DishService {
     }
   }
 
-  updateDish(dish: Dish, dishId: string | undefined) {
-    return this.afs.collection<Dish>(this.collectionName).doc(dishId).update(dish);
+  updateDish(dish: Dish, dishId: string | undefined): Promise<void> {
+    return this.afs.collection<Dish>(this.dishCollectionName).doc(dishId).update(dish);
   }
 
-  async deleteDish(dish: Dish, numOfSourceSets: number) {
+  async deleteDish(dish: Dish, numOfSourceSets: number): Promise<void[]> {
     try {
-      await this.afs.collection<Dish>(this.collectionName).doc(dish.id).delete();
+      await this.afs.collection<Dish>(this.dishCollectionName).doc(dish.id).delete();
       const imagesToRemove: Promise<void>[] = [];
       for (let i = 0; i < dish.numOfImages * numOfSourceSets; i++) {
         const removeImage = lastValueFrom(this.storage.ref("images/dishes/" + dish.id + "-" + i.toString() + ".jpg")

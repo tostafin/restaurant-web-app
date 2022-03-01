@@ -18,7 +18,7 @@ export class SettingsService {
 
     this.persistence$.subscribe(persistence => {
       this.currPersistence = persistence !== undefined ? persistence.persistence : "";
-    })
+    });
   }
 
   openGlobalSnackbarMessage(message: string,

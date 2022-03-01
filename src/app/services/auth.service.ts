@@ -32,7 +32,6 @@ export class AuthService {
           return afs.doc<Users>(`users/${user?.uid}`).valueChanges();
         }
         return of(null);
-
       })
     );
 
@@ -40,6 +39,7 @@ export class AuthService {
       if (user) {
         this.user = user;
         this.getUserDataFromDB();
+        this.setPersistence();
       } else {
         this.user = null;
         this.userRoles = {
@@ -49,8 +49,6 @@ export class AuthService {
         };
         this.username = "";
       }
-
-      this.setPersistence();
     });
   }
 
@@ -60,7 +58,6 @@ export class AuthService {
       const newUser = await this.auth.createUserWithEmailAndPassword(registerForm.email, registerForm.password);
       if (newUser.user?.uid !== undefined) {
         const newUserData: Users = {
-          uid: newUser.user.uid,
           username: registerForm.username,
           numOfOrders: 0,
           currOrder: {},
@@ -90,18 +87,22 @@ export class AuthService {
   }
 
   getUserDataFromDB(): void {
-    this.afs.doc<Users>(`users/${this.user?.uid}`).valueChanges().subscribe(user => {
-      if (user !== undefined) {
+    this.userObs$.subscribe(user => {
+      if (user) {
         this.userDataDB = user;
         this.userRoles = user.roles;
         this.username = user.username;
       }
-    })
+    });
   }
 
   setPersistence(): void {
     this.settingsService.persistence$.subscribe(persistence => {
-      if (persistence !== undefined) this.auth.setPersistence(persistence.persistence);
+      if (persistence !== undefined) this.auth.setPersistence(persistence.persistence)
+        .catch(e => this.settingsService.openGlobalSnackbarMessage(
+            "An error occurred while setting global persistence: " + e
+          )
+        );
     })
   }
 

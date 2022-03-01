@@ -6,6 +6,7 @@
         <h3>{{user.username}}:</h3>
         <mat-button-toggle-group
           multiple
+          *ngIf="user.uid !== undefined"
           [value]="usersService.usersRolesArr[user.uid]">
           <mat-button-toggle
             *ngFor="let role of roles"
@@ -18,7 +19,7 @@
     </section>
   </mat-tab>
   <mat-tab label="Session persistence">
-    <section>
+    <section *ngIf="settingsService.currPersistence !== ''">
       <h1 class="title">Change global session persistence:</h1>
       <mat-button-toggle-group [(ngModel)]="settingsService.currPersistence">
         <mat-button-toggle value="local" (change)="setPersistence('local')">LOCAL</mat-button-toggle>
