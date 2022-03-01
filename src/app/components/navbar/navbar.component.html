@@ -17,7 +17,7 @@
   <span class="flex-spacer"></span>
   <div class="user-auth-block" *ngIf="authService.user; else newUser">
     <h3 class="username" *ngIf="authService.username !== ''">Hello, {{authService.username}}!</h3>
-    <button (click)="authService.signOutUser()">Log out</button>
+    <button (click)="signOutUser()">Log out</button>
   </div>
   <ng-template class="user-auth-block" #newUser>
     <a routerLinkActive="active-link" routerLink="/login">Log in</a>
@@ -58,7 +58,7 @@
       <span>Cart</span>
     </button>
     <div *ngIf="authService.user">
-      <button mat-menu-item (click)="authService.signOutUser()">
+      <button mat-menu-item (click)="signOutUser()">
         <mat-icon>logout</mat-icon>
         <span>Log out</span>
       </button>
@@ -74,6 +74,5 @@
         <span>Register</span>
       </button>
     </div>
-
   </mat-menu>
 </nav>

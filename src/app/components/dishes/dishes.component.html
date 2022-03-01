@@ -115,7 +115,7 @@
                   mat-mini-fab
                   (click)="dishOrderService.addDishOrder(dish.id, dish.price, dish.name); $event.stopPropagation()"
                   [disabled]="dishOrderService.currOrder[dish.id] &&
-                  dishOrderService.currOrder[dish.id].quantity === dish.quantity">
+                  dishOrderService.currOrder[dish.id].quantity === dish.quantity || dish.quantity === 0">
                   <mat-icon>add</mat-icon>
                 </button>
               </div>
