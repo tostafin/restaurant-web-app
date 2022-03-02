@@ -7,6 +7,7 @@ import firebase from "firebase/compat";
 import User = firebase.User;
 import { SettingsService } from "./settings.service";
 import { Roles } from "../interfaces/roles";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth,
               private afs: AngularFirestore,
-              private settingsService: SettingsService
+              private settingsService: SettingsService,
+              private router: Router
   ) {
     this.userObs$ = auth.authState.pipe(
       switchMap(user => {
@@ -82,8 +84,13 @@ export class AuthService {
     return this.auth.signInWithEmailAndPassword(loginForm.email, loginForm.password);
   }
 
-  signOutUser(): Promise<void> {
-    return this.auth.signOut();
+  async signOutUser(): Promise<void> {
+    try {
+      await this.router.navigate(['/homepage']);
+      return this.auth.signOut();
+    } catch (e) {
+      return Promise.reject(e);
+    }
   }
 
   getUserDataFromDB(): void {

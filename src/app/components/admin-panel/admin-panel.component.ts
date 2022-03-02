@@ -18,7 +18,8 @@ export class AdminPanelComponent implements OnInit {
               public usersService: UsersService,
               private snackBar: MatSnackBar,
               public settingsService: SettingsService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {

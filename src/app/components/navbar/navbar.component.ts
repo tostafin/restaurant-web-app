@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { SettingsService } from "../../services/settings.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +10,7 @@ import { Router } from "@angular/router";
 export class NavbarComponent implements OnInit {
 
   constructor(public authService: AuthService,
-              private settingsService: SettingsService,
-              private router: Router
+              private settingsService: SettingsService
   ) { }
 
   ngOnInit(): void {
@@ -20,10 +18,7 @@ export class NavbarComponent implements OnInit {
 
   signOutUser(): void {
     this.authService.signOutUser()
-      .then(() => {
-        this.settingsService.openGlobalSnackbarMessage("You signed out.");
-        this.router.navigate(['/homepage']);
-      })
+      .then(() => this.settingsService.openGlobalSnackbarMessage("You signed out."))
       .catch(e => this.settingsService.openGlobalSnackbarMessage("An error occurred while signing you out: " + e));
   }
 
